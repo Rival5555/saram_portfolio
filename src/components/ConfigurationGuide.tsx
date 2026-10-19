@@ -5,17 +5,17 @@ export const ConfigurationGuide: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const placeholderList = [
-    { label: "[FULL NAME]", description: "Your complete official name" },
-    { label: "[PROFESSIONAL TITLE]", description: "e.g., AI Student & Public Servant" },
-    { label: "[UNIVERSITY NAME]", description: "Your degree-awarding institution" },
-    { label: "[CURRENT SEMESTER / GRADUATION YEAR]", description: "e.g., 5th Semester / Expected 2027" },
-    { label: "[MOTORWAY POLICE JOB TITLE]", description: "Your verified NHMP designation" },
-    { label: "[CALL CENTER COMPANY]", description: "Organization name for 2-year tenure" },
-    { label: "[AI PROJECTS]", description: "Coursework or independent intelligence repos" },
-    { label: "[TECHNICAL SKILLS]", description: "Verified Python, C++, ML libraries" },
-    { label: "[EMAIL]", description: "Your professional contact address" },
-    { label: "[LINKEDIN URL]", description: "Your active profile link" },
-    { label: "[GITHUB URL]", description: "Your development profile link" },
+    { label: "Saram Zafar", status: "Verified", description: "Official Name" },
+    { label: "Business Development Executive", status: "Verified", description: "Professional Title" },
+    { label: "National Textile University, Faisalabad", status: "Verified", description: "Degree Institution" },
+    { label: "2023–2028", status: "Verified", description: "Academic Timeline" },
+    { label: "[MOTORWAY POLICE JOB TITLE]", status: "Pending", description: "Your verified NHMP designation" },
+    { label: "[CALL CENTER COMPANY]", status: "Pending", description: "Organization name for 2-year tenure" },
+    { label: "[AI PROJECTS]", status: "Pending", description: "Coursework or independent intelligence repos" },
+    { label: "[TECHNICAL SKILLS]", status: "Pending", description: "Verified Python, C++, ML libraries" },
+    { label: "[EMAIL]", status: "Pending", description: "Your professional contact address" },
+    { label: "[LINKEDIN URL]", status: "Pending", description: "Your active profile link" },
+    { label: "https://github.com/Rival5555", status: "Verified", description: "GitHub Profile" },
   ];
 
   return (
@@ -172,15 +172,29 @@ export const ConfigurationGuide: React.FC = () => {
                     fontSize: '0.8125rem',
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                    }}
-                  >
-                    {item.label}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.625rem',
+                        padding: '0.1rem 0.35rem',
+                        backgroundColor: item.status === 'Verified' ? 'var(--accent-green-light)' : 'var(--bg-hover)',
+                        color: item.status === 'Verified' ? 'var(--accent-green)' : 'var(--text-tertiary)',
+                        border: item.status === 'Verified' ? '1px solid var(--accent-green-border)' : '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
                   <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem' }}>
                     {item.description}
                   </span>

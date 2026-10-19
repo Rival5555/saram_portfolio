@@ -72,7 +72,7 @@ export const CoordinateGraphic: React.FC<CoordinateGraphicProps> = ({ className 
             letterSpacing="0.08em"
             fontWeight="600"
           >
-            NODE: INTELLIGENCE [BS AI]
+            NODE: INTELLIGENCE [BS AI // NTU]
           </text>
         </g>
 

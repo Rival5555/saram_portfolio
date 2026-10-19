@@ -64,25 +64,38 @@ export const Navbar: React.FC = () => {
             style={{
               fontFamily: 'var(--font-mono)',
               fontWeight: 600,
-              fontSize: '0.875rem',
+              fontSize: '0.8125rem',
               color: 'var(--accent-green)',
               padding: '0.2rem 0.45rem',
               border: '1px solid var(--accent-green)',
               letterSpacing: '0.04em',
             }}
           >
-            H × I
+            SZ
           </span>
-          <span
-            style={{
-              fontWeight: 600,
-              fontSize: '1rem',
-              letterSpacing: '-0.02em',
-              color: 'var(--text-primary)',
-            }}
-          >
-            {personal.fullName}
-          </span>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span
+              style={{
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                letterSpacing: '-0.02em',
+                color: 'var(--text-primary)',
+                lineHeight: 1.15,
+              }}
+            >
+              {personal.fullName}
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.625rem',
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.02em',
+              }}
+            >
+              {personal.professionalTitle}
+            </span>
+          </div>
         </a>
 
         {/* Center / Right: Desktop Navigation Links & Availability */}

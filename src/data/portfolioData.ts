@@ -51,9 +51,9 @@ export interface SkillCategory {
 export const portfolioData = {
   // Personal & Identity
   personal: {
-    fullName: "[FULL NAME]",
+    fullName: "Saram Zafar",
     shortName: "Saram", // Monogram / short identifier
-    professionalTitle: "[PROFESSIONAL TITLE]",
+    professionalTitle: "Business Development Executive",
     taglineEyebrow: "ARTIFICIAL INTELLIGENCE / PUBLIC SERVICE / COMMUNICATION",
     location: "Pakistan",
     coordinates: "30.3753° N, 69.3451° E",
@@ -63,7 +63,7 @@ export const portfolioData = {
     },
     bio: {
       heroParagraph:
-        "I'm [FULL NAME], a BS Artificial Intelligence student combining a growing interest in intelligent systems with professional experience in public service and customer communication.",
+        "I'm Saram Zafar, a Business Development Executive and BS Artificial Intelligence student combining a growing interest in intelligent systems with professional experience in public service and customer communication.",
       perspectiveIntro:
         "A foundation built on discipline, human connection, and analytical curiosity.",
       perspectiveBody: [
@@ -95,7 +95,7 @@ export const portfolioData = {
     contact: {
       email: "[EMAIL]@example.com", // Replace with your real email
       linkedin: "https://linkedin.com/in/[LINKEDIN-USERNAME]", // Replace with your profile URL
-      github: "https://github.com/[GITHUB-USERNAME]", // Replace with your GitHub URL
+      github: "https://github.com/Rival5555", // Updated with user's GitHub username
       displayEmail: "[EMAIL]",
       invitationText: "Interested in AI, meaningful technical challenges, and opportunities to keep learning? Let's connect.",
     },
@@ -133,10 +133,10 @@ export const portfolioData = {
   // Education
   education: {
     degree: "BS Artificial Intelligence",
-    institution: "[UNIVERSITY NAME]",
-    statusPeriod: "[CURRENT SEMESTER / EXPECTED GRADUATION YEAR]",
+    institution: "National Textile University, Faisalabad",
+    statusPeriod: "2023–2028",
     degreeStatus: "Degree In Progress",
-    location: "Pakistan",
+    location: "Faisalabad, Pakistan",
     academicPillars: [
       "Foundational Mathematics & Calculus for Computing",
       "Object-Oriented Programming & Data Structures",
