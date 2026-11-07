@@ -4,7 +4,8 @@ import { ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export const Projects: React.FC = () => {
-  const { projects } = portfolioData;
+  const { projects, personal } = portfolioData;
+  const hasPlaceholders = projects.some((p) => p.isPlaceholder);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -47,36 +48,38 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Editorial Notice Banner */}
-        <div
-          style={{
-            backgroundColor: 'var(--bg-card)',
-            border: '1px solid var(--border-subtle)',
-            padding: '1rem 1.5rem',
-            marginBottom: '2.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <FolderGit2 size={18} color="var(--accent-green)" />
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-              <strong style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Notice on Projects:</strong> The entries below represent structured blueprints for upcoming academic and research work. Replace them seamlessly in <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', backgroundColor: 'var(--bg-hover)', padding: '0.1rem 0.35rem' }}>portfolioData.ts</code>.
-            </p>
-          </div>
-          <span
+        {/* Editorial Notice Banner (only shown while placeholder entries exist) */}
+        {hasPlaceholders && (
+          <div
             style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              color: 'var(--accent-green)',
+              backgroundColor: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
+              padding: '1rem 1.5rem',
+              marginBottom: '2.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1rem',
             }}
           >
-            ZERO FICTIONAL CLAIMS
-          </span>
-        </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <FolderGit2 size={18} color="var(--accent-green)" />
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Notice on Projects:</strong> The entries below represent structured blueprints for upcoming academic and research work. Replace them seamlessly in <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', backgroundColor: 'var(--bg-hover)', padding: '0.1rem 0.35rem' }}>portfolioData.ts</code>.
+              </p>
+            </div>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                color: 'var(--accent-green)',
+              }}
+            >
+              ZERO FICTIONAL CLAIMS
+            </span>
+          </div>
+        )}
 
         {/* Projects Grid */}
         <div
@@ -93,14 +96,12 @@ export const Projects: React.FC = () => {
               <article
                 key={proj.id}
                 style={{
-                  gridColumn: 'span 12',
                   backgroundColor: 'var(--bg-card)',
                   border: '1px solid var(--border-subtle)',
                   padding: 'clamp(1.75rem, 3.5vw, 2.75rem)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  transition: 'all var(--transition-smooth)',
                   position: 'relative',
                 }}
                 className="project-editorial-card"
@@ -259,21 +260,25 @@ export const Projects: React.FC = () => {
 
                   {/* Repository / Demo Link */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                    {proj.githubUrl && (
-                      <a
-                        href={proj.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="editorial-link"
-                        style={{ fontSize: '0.8125rem' }}
-                      >
-                        <GithubIcon size={14} />
-                        <span>Repository Placeholder</span>
-                        <ExternalLink size={12} className="icon-arrow" />
-                      </a>
-                    )}
+                    {proj.githubUrl && (() => {
+                      const isUnfilledRepo = proj.githubUrl.includes('[');
+                      const resolvedUrl = isUnfilledRepo ? personal.contact.github : proj.githubUrl;
+                      return (
+                        <a
+                          href={resolvedUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="editorial-link"
+                          style={{ fontSize: '0.8125rem' }}
+                        >
+                          <GithubIcon size={14} />
+                          <span>{isUnfilledRepo ? 'GitHub Profile (Repo Pending)' : 'View Repository'}</span>
+                          <ExternalLink size={12} className="icon-arrow" />
+                        </a>
+                      );
+                    })()}
 
-                    {proj.demoUrl && (
+                    {proj.demoUrl && !proj.demoUrl.includes('[') && (
                       <a
                         href={proj.demoUrl}
                         target="_blank"
@@ -293,18 +298,6 @@ export const Projects: React.FC = () => {
           })}
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .project-editorial-card {
-            grid-column: span 4 !important;
-          }
-        }
-        .project-editorial-card:hover {
-          border-color: var(--border-strong) !important;
-          transform: translateY(-2px);
-        }
-      `}</style>
     </section>
   );
 };

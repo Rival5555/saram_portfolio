@@ -38,7 +38,7 @@ export const Contact: React.FC = () => {
           }}
         >
           {/* Main Left: Invitation Narrative & Working Channels */}
-          <div style={{ gridColumn: 'span 12' }} className="contact-main-col">
+          <div className="contact-main-col">
             <p
               style={{
                 fontSize: 'clamp(1.125rem, 2vw, 1.35rem)',
@@ -148,42 +148,76 @@ export const Contact: React.FC = () => {
                 }}
               >
                 {/* LinkedIn */}
-                <a
-                  href={personal.contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: 'var(--bg-card)',
-                    border: '1px solid var(--border-subtle)',
-                    padding: '1.25rem 1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    textDecoration: 'none',
-                    transition: 'border-color var(--transition-smooth)',
-                  }}
-                  className="channel-card"
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                    <LinkedinIcon size={20} color="var(--accent-green)" />
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.6875rem',
-                          color: 'var(--text-tertiary)',
-                          textTransform: 'uppercase',
-                        }}
-                      >
-                        Professional Network
-                      </div>
-                      <div style={{ fontWeight: 500, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
-                        LinkedIn Profile
+                {personal.contact.linkedin.includes('[') ? (
+                  <div
+                    style={{
+                      backgroundColor: 'var(--bg-card)',
+                      border: '1px dashed var(--border-strong)',
+                      padding: '1.25rem 1.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                      <LinkedinIcon size={20} color="var(--text-tertiary)" />
+                      <div>
+                        <div
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.6875rem',
+                            color: 'var(--text-tertiary)',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          Professional Network
+                        </div>
+                        <div style={{ fontWeight: 500, fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>
+                          LinkedIn Profile
+                        </div>
                       </div>
                     </div>
+                    <span className="placeholder-indicator" style={{ marginLeft: 0 }}>
+                      URL Pending
+                    </span>
                   </div>
-                  <ArrowUpRight size={16} color="var(--text-secondary)" className="icon-arrow" />
-                </a>
+                ) : (
+                  <a
+                    href={personal.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      backgroundColor: 'var(--bg-card)',
+                      border: '1px solid var(--border-subtle)',
+                      padding: '1.25rem 1.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      textDecoration: 'none',
+                    }}
+                    className="channel-card"
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                      <LinkedinIcon size={20} color="var(--accent-green)" />
+                      <div>
+                        <div
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.6875rem',
+                            color: 'var(--text-tertiary)',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          Professional Network
+                        </div>
+                        <div style={{ fontWeight: 500, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
+                          LinkedIn Profile
+                        </div>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={16} color="var(--text-secondary)" className="icon-arrow" />
+                  </a>
+                )}
 
                 {/* GitHub */}
                 <a
@@ -229,7 +263,6 @@ export const Contact: React.FC = () => {
           {/* Right Column: Location & Professional Protocol */}
           <div
             style={{
-              gridColumn: 'span 12',
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-subtle)',
               padding: 'clamp(1.5rem, 3vw, 2.5rem)',
@@ -288,24 +321,6 @@ export const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .contact-main-col {
-            grid-column: span 7 !important;
-          }
-          .contact-sidebar-col {
-            grid-column: span 5 !important;
-          }
-        }
-        .channel-card:hover {
-          border-color: var(--border-strong) !important;
-        }
-        .channel-card:hover .icon-arrow {
-          transform: translate(3px, -3px);
-          color: var(--accent-green) !important;
-        }
-      `}</style>
     </section>
   );
 };
