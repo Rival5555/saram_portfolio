@@ -30,7 +30,7 @@ export const Experience: React.FC = () => {
                 color: 'var(--text-tertiary)',
               }}
             >
-              EDITORIAL TIMELINE // 02 ENTRIES
+              EDITORIAL TIMELINE // 0{experience.length} ENTRIES
             </span>
           </div>
         </div>
@@ -57,7 +57,7 @@ export const Experience: React.FC = () => {
                 }}
               >
                 {/* Column 1: Sequence & Time Period */}
-                <div style={{ gridColumn: 'span 12' }} className="exp-meta-col">
+                <div className="exp-meta-col">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
                     <span
                       style={{
@@ -114,7 +114,7 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Column 2: Role & Organization */}
-                <div style={{ gridColumn: 'span 12' }} className="exp-title-col">
+                <div className="exp-title-col">
                   <h3
                     style={{
                       fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)',
@@ -140,7 +140,7 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Column 3: Verified Description & Tags */}
-                <div style={{ gridColumn: 'span 12' }} className="exp-desc-col">
+                <div className="exp-desc-col">
                   {item.isPlaceholderDescription && (
                     <div
                       style={{
@@ -197,23 +197,6 @@ export const Experience: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .exp-meta-col {
-            grid-column: span 3 !important;
-          }
-          .exp-title-col {
-            grid-column: span 4 !important;
-          }
-          .exp-desc-col {
-            grid-column: span 5 !important;
-          }
-        }
-        .experience-item-row:hover {
-          background-color: rgba(236, 234, 227, 0.4);
-        }
-      `}</style>
     </section>
   );
 };

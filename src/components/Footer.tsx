@@ -2,9 +2,10 @@ import React from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { ArrowUp } from 'lucide-react';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   const { personal } = portfolioData;
-  const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -69,7 +70,7 @@ export const Footer: React.FC = () => {
               textAlign: 'center',
             }}
           >
-            © {currentYear} {personal.fullName} · All rights reserved.
+            © {CURRENT_YEAR} {personal.fullName} · All rights reserved.
             <div style={{ fontSize: '0.6875rem', marginTop: '0.2rem' }}>
               Designed with Swiss Minimalist Editorial Principles
             </div>
@@ -100,13 +101,6 @@ export const Footer: React.FC = () => {
           </button>
         </div>
       </div>
-
-      <style>{`
-        .back-to-top-btn:hover {
-          background-color: var(--bg-hover) !important;
-          border-color: var(--text-primary) !important;
-        }
-      `}</style>
     </footer>
   );
 };

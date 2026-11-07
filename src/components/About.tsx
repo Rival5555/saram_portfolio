@@ -6,9 +6,9 @@ export const About: React.FC = () => {
   const { personal } = portfolioData;
 
   const pillarIcons = [
-    <ShieldCheck size={22} color="var(--accent-green)" />,
-    <MessageSquareCode size={22} color="var(--accent-green)" />,
-    <BrainCircuit size={22} color="var(--accent-green)" />,
+    <ShieldCheck key="shield" size={22} color="var(--accent-green)" />,
+    <MessageSquareCode key="message" size={22} color="var(--accent-green)" />,
+    <BrainCircuit key="brain" size={22} color="var(--accent-green)" />,
   ];
 
   return (
@@ -31,7 +31,7 @@ export const About: React.FC = () => {
             marginBottom: 'clamp(3rem, 6vw, 4.5rem)',
           }}
         >
-          <div style={{ gridColumn: 'span 12' }} className="about-lead-col">
+          <div className="about-lead-col">
             <p
               style={{
                 fontSize: 'clamp(1.25rem, 2.2vw, 1.625rem)',
@@ -47,7 +47,7 @@ export const About: React.FC = () => {
             </p>
           </div>
 
-          <div style={{ gridColumn: 'span 12' }} className="about-body-col">
+          <div className="about-body-col">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {personal.bio.perspectiveBody.map((paragraph, index) => (
                 <p
@@ -77,14 +77,12 @@ export const About: React.FC = () => {
             <div
               key={pillar.number}
               style={{
-                gridColumn: 'span 12',
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 padding: 'clamp(1.5rem, 3vw, 2.25rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                transition: 'border-color var(--transition-smooth), transform var(--transition-smooth)',
               }}
               className="about-pillar-card"
             >
@@ -163,24 +161,6 @@ export const About: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .about-lead-col {
-            grid-column: span 5 !important;
-          }
-          .about-body-col {
-            grid-column: span 7 !important;
-          }
-          .about-pillar-card {
-            grid-column: span 4 !important;
-          }
-        }
-        .about-pillar-card:hover {
-          border-color: var(--border-strong) !important;
-          transform: translateY(-2px);
-        }
-      `}</style>
     </section>
   );
 };

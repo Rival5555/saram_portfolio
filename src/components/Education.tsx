@@ -28,7 +28,6 @@ export const Education: React.FC = () => {
           {/* Main Degree Profile */}
           <div
             style={{
-              gridColumn: 'span 12',
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-subtle)',
               padding: 'clamp(1.75rem, 4vw, 3rem)',
@@ -137,7 +136,6 @@ export const Education: React.FC = () => {
           {/* Core Areas & Coursework Pillar */}
           <div
             style={{
-              gridColumn: 'span 12',
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-subtle)',
               padding: 'clamp(1.75rem, 4vw, 3rem)',
@@ -218,17 +216,6 @@ export const Education: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .edu-main-col {
-            grid-column: span 7 !important;
-          }
-          .edu-course-col {
-            grid-column: span 5 !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };

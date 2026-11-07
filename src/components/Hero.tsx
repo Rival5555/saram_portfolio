@@ -1,10 +1,18 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { CoordinateGraphic } from './CoordinateGraphic';
-import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, MapPin, FileDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const { personal } = portfolioData;
+
+  const handleResumeClick = () => {
+    if (personal.contact.resumeUrl) {
+      window.open(personal.contact.resumeUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      window.print();
+    }
+  };
 
   return (
     <section
@@ -114,6 +122,17 @@ export const Hero: React.FC = () => {
                 <ArrowUpRight size={16} />
               </a>
 
+              <button
+                type="button"
+                onClick={handleResumeClick}
+                className="btn-secondary"
+                title="Print or save Swiss-style CV as PDF"
+                aria-label="Download or print CV"
+              >
+                <span>CV / Resume</span>
+                <FileDown size={15} />
+              </button>
+
               <a
                 href="#about"
                 className="editorial-link"
@@ -165,47 +184,6 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Responsive layout styles */}
-      <style>{`
-        .hero-editorial-wrapper {
-          display: flex;
-          flex-direction: column-reverse;
-          gap: 2.5rem;
-          align-items: center;
-        }
-
-        .hero-text-col {
-          width: 100%;
-        }
-
-        .hero-graphic-col {
-          width: 100%;
-          max-width: 380px;
-          display: flex;
-          justifyContent: center;
-        }
-
-        @media (min-width: 860px) {
-          .hero-editorial-wrapper {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 3rem;
-          }
-
-          .hero-text-col {
-            flex: 1 1 58%;
-            max-width: 60%;
-          }
-
-          .hero-graphic-col {
-            flex: 1 1 40%;
-            max-width: 440px;
-            justify-content: flex-end;
-          }
-        }
-      `}</style>
     </section>
   );
 };

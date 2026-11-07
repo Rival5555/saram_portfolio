@@ -46,14 +46,12 @@ export const Skills: React.FC = () => {
             <div
               key={cat.code}
               style={{
-                gridColumn: 'span 12',
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 padding: 'clamp(1.5rem, 3vw, 2.25rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                transition: 'border-color var(--transition-smooth)',
               }}
               className="skill-card-col"
             >
@@ -173,22 +171,6 @@ export const Skills: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 640px) and (max-width: 1023px) {
-          .skill-card-col {
-            grid-column: span 6 !important;
-          }
-        }
-        @media (min-width: 1024px) {
-          .skill-card-col {
-            grid-column: span 3 !important;
-          }
-        }
-        .skill-card-col:hover {
-          border-color: var(--border-strong) !important;
-        }
-      `}</style>
     </section>
   );
 };
