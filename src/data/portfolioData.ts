@@ -54,7 +54,7 @@ export const portfolioData = {
     fullName: "Saram Zafar",
     shortName: "Saram", // Monogram / short identifier
     professionalTitle: "Business Development Executive",
-    taglineEyebrow: "ARTIFICIAL INTELLIGENCE / PUBLIC SERVICE / COMMUNICATION",
+    taglineEyebrow: "ARTIFICIAL INTELLIGENCE / BUSINESS DEVELOPMENT / PUBLIC SERVICE",
     location: "Pakistan",
     coordinates: "30.3753° N, 69.3451° E",
     availability: {
@@ -63,13 +63,13 @@ export const portfolioData = {
     },
     bio: {
       heroParagraph:
-        "I'm Saram Zafar, a Business Development Executive and BS Artificial Intelligence student combining a growing interest in intelligent systems with professional experience in public service and customer communication.",
+        "I'm Saram Zafar, a Business Development Executive and BS Artificial Intelligence student combining a growing interest in intelligent systems with professional experience in business growth, public service, and customer communication.",
       perspectiveIntro:
-        "A foundation built on discipline, human connection, and analytical curiosity.",
+        "A foundation built on discipline, strategic communication, and analytical curiosity.",
       perspectiveBody: [
-        "My journey exists at an uncommon intersection: the formal academic exploration of intelligent algorithms, the structured responsibility of Pakistan's Motorway Police, and two years of front-line communication resolving high-stakes challenges in customer support.",
-        "Where others see disparate fields, I recognize a continuous thread: systems require both technical clarity and human integrity. In public service, quick decisions impact real safety; in customer communication, active listening bridges high-stress misunderstandings; in artificial intelligence, deliberate logic models real-world reasoning.",
-        "I am focused on disciplined skill development, principled problem-solving, and contributing to technical environments where diligence and clear communication matter as much as computational code."
+        "My journey exists at an uncommon intersection: the formal academic exploration of intelligent algorithms, client-focused strategy as a Business Development Executive, the structured responsibility of Pakistan's Motorway Police, and two years of front-line customer communication.",
+        "Where others see disparate fields, I recognize a continuous thread: systems require both technical clarity and human integrity. In public service, quick decisions impact real safety; in business development and customer communication, active listening builds trust and bridges complex needs; in artificial intelligence, deliberate logic models real-world reasoning.",
+        "I am focused on disciplined skill development, principled problem-solving, and contributing to technical and commercial environments where diligence and clear communication matter as much as computational code."
       ],
       pillars: [
         {
@@ -80,9 +80,9 @@ export const portfolioData = {
         },
         {
           number: "02",
-          title: "Human Communication",
-          source: "2 Years Call Center Operations",
-          highlight: "Active listening, rapid conflict de-escalation, clear verbal articulation, and empathy-driven problem resolution.",
+          title: "Business Growth & Communication",
+          source: "Business Development & Call Center Operations",
+          highlight: "Client relationship management, strategic outreach, active listening, rapid conflict de-escalation, and empathy-driven problem resolution.",
         },
         {
           number: "03",
@@ -96,6 +96,7 @@ export const portfolioData = {
       email: "[EMAIL]@example.com", // Replace with your real email
       linkedin: "https://linkedin.com/in/[LINKEDIN-USERNAME]", // Replace with your profile URL
       github: "https://github.com/Rival5555", // Updated with user's GitHub username
+      resumeUrl: undefined, // Replace with "/resume.pdf" if you add a static PDF to public/
       displayEmail: "[EMAIL]",
       invitationText: "Interested in AI, meaningful technical challenges, and opportunities to keep learning? Let's connect.",
     },
@@ -106,6 +107,18 @@ export const portfolioData = {
     {
       id: "exp-01",
       sequence: "01",
+      role: "Business Development Executive",
+      organization: "[COMPANY / ORGANIZATION]",
+      location: "Pakistan",
+      period: "[DATES]",
+      description:
+        "Driving client acquisition, requirement discovery, and strategic relationship management. Combining analytical understanding of technical solutions with clear stakeholder communication to align client objectives with actionable deliverables.",
+      isPlaceholderDescription: true,
+      tags: ["Business Development", "Client Acquisition", "Stakeholder Communication", "Proposal Strategy"],
+    },
+    {
+      id: "exp-02",
+      sequence: "02",
       role: "[CURRENT MOTORWAY POLICE JOB TITLE]",
       organization: "Pakistan Motorway Police",
       location: "Pakistan",
@@ -116,8 +129,8 @@ export const portfolioData = {
       tags: ["Public Service", "Operational Discipline", "Public Safety", "Regulatory Compliance"],
     },
     {
-      id: "exp-02",
-      sequence: "02",
+      id: "exp-03",
+      sequence: "03",
       role: "[CALL CENTER JOB TITLE]",
       organization: "[CALL CENTER COMPANY]",
       location: "Pakistan",
