@@ -1,21 +1,90 @@
 import React, { useState } from 'react';
 import { Sliders, X, FileCode } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
+
+const isUnfilled = (val: string) => !val || val.includes('[') || val.includes(']');
 
 export const ConfigurationGuide: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { personal, experience, education, skillCategories, projects } = portfolioData;
+
+  const isGuideEnabled =
+    import.meta.env.DEV ||
+    (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('guide') === '1');
+
+  if (!isGuideEnabled) {
+    return null;
+  }
+
+  const exp01 = experience[0];
+  const exp02 = experience[1];
+  const exp03 = experience[2];
+  const hasPlaceholderSkills = skillCategories.some((cat) =>
+    cat.skills.some((s) => s.isPlaceholder)
+  );
+  const hasPlaceholderProjects = projects.some((p) => p.isPlaceholder);
 
   const placeholderList = [
-    { label: "Saram Zafar", status: "Verified", description: "Official Name" },
-    { label: "Business Development Executive", status: "Verified", description: "Professional Title" },
-    { label: "National Textile University, Faisalabad", status: "Verified", description: "Degree Institution" },
-    { label: "2023–2028", status: "Verified", description: "Academic Timeline" },
-    { label: "[MOTORWAY POLICE JOB TITLE]", status: "Pending", description: "Your verified NHMP designation" },
-    { label: "[CALL CENTER COMPANY]", status: "Pending", description: "Organization name for 2-year tenure" },
-    { label: "[AI PROJECTS]", status: "Pending", description: "Coursework or independent intelligence repos" },
-    { label: "[TECHNICAL SKILLS]", status: "Pending", description: "Verified Python, C++, ML libraries" },
-    { label: "[EMAIL]", status: "Pending", description: "Your professional contact address" },
-    { label: "[LINKEDIN URL]", status: "Pending", description: "Your active profile link" },
-    { label: "https://github.com/Rival5555", status: "Verified", description: "GitHub Profile" },
+    {
+      label: personal.fullName,
+      status: isUnfilled(personal.fullName) ? 'Pending' : 'Verified',
+      description: 'Official Name',
+    },
+    {
+      label: personal.professionalTitle,
+      status: isUnfilled(personal.professionalTitle) ? 'Pending' : 'Verified',
+      description: 'Professional Title',
+    },
+    {
+      label: education.institution,
+      status: isUnfilled(education.institution) ? 'Pending' : 'Verified',
+      description: 'Degree Institution',
+    },
+    {
+      label: education.statusPeriod,
+      status: isUnfilled(education.statusPeriod) ? 'Pending' : 'Verified',
+      description: 'Academic Timeline',
+    },
+    {
+      label: exp01?.organization || '[BDE ORGANIZATION]',
+      status: !exp01 || isUnfilled(exp01.organization) || exp01.isPlaceholderDescription ? 'Pending' : 'Verified',
+      description: 'Business Development organization & dates',
+    },
+    {
+      label: exp02?.role || '[MOTORWAY POLICE JOB TITLE]',
+      status: !exp02 || isUnfilled(exp02.role) || exp02.isPlaceholderDescription ? 'Pending' : 'Verified',
+      description: 'Your verified NHMP designation',
+    },
+    {
+      label: exp03?.organization || '[CALL CENTER COMPANY]',
+      status: !exp03 || isUnfilled(exp03.organization) || exp03.isPlaceholderDescription ? 'Pending' : 'Verified',
+      description: 'Organization name for 2-year tenure',
+    },
+    {
+      label: hasPlaceholderProjects ? '[AI PROJECTS]' : `${projects.length} Verified Projects`,
+      status: hasPlaceholderProjects ? 'Pending' : 'Verified',
+      description: 'Coursework or independent intelligence repos',
+    },
+    {
+      label: hasPlaceholderSkills ? '[TECHNICAL SKILLS]' : 'All Skills Verified',
+      status: hasPlaceholderSkills ? 'Pending' : 'Verified',
+      description: 'Verified Python, C++, ML libraries',
+    },
+    {
+      label: personal.contact.email,
+      status: isUnfilled(personal.contact.email) ? 'Pending' : 'Verified',
+      description: 'Your professional contact address',
+    },
+    {
+      label: personal.contact.linkedin,
+      status: isUnfilled(personal.contact.linkedin) ? 'Pending' : 'Verified',
+      description: 'Your active profile link',
+    },
+    {
+      label: personal.contact.github,
+      status: isUnfilled(personal.contact.github) ? 'Pending' : 'Verified',
+      description: 'GitHub Profile',
+    },
   ];
 
   return (
