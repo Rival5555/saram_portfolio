@@ -7,10 +7,7 @@ export const ConfigurationGuide: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { personal, experience, education, skillCategories, projects } = portfolioData;
 
-  const isGuideEnabled =
-    import.meta.env.DEV ||
-    (typeof window !== 'undefined' &&
-      new URLSearchParams(window.location.search).get('guide') === '1');
+  const isGuideEnabled = import.meta.env.DEV;
 
   if (!isGuideEnabled) {
     return null;
