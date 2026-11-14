@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "_headers": "properties",
+    "**/_headers": "properties",
+    "_redirects": "properties",
+    "**/_redirects": "properties",
+    ".env*": "properties"
+  },
+  "workbench.editor.languageDetection": false
+}
