@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Copy, Check, ArrowUpRight, MapPin } from 'lucide-react';
 import { personalInfo } from '../../data/personalInfo';
-import { copyToClipboard } from '../../utils/helpers';
+import { copyToClipboard, sanitizeMailto } from '../../utils/helpers';
 import { Container } from '../common/Container';
 import { SectionHeading } from '../common/SectionHeading';
 import { SocialLinks } from '../common/SocialLinks';
@@ -133,7 +133,7 @@ export const Contact: React.FC = () => {
                   </button>
 
                   <a
-                    href={`mailto:${personalInfo.contact.email}`}
+                    href={sanitizeMailto(personalInfo.contact.email)}
                     className="btn-primary"
                     style={{ padding: '0.45rem 1rem', fontSize: '0.8125rem' }}
                   >

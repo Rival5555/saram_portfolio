@@ -1,4 +1,5 @@
 import React from 'react';
+import { sanitizeUrl } from '../../utils/helpers';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'editorial';
@@ -35,12 +36,14 @@ export const Button: React.FC<ButtonProps> = ({
   const combinedClassName = `${variantClass} ${className}`.trim();
 
   if (href) {
+    const safeHref = sanitizeUrl(href);
+    const safeRel = target === '_blank' ? rel || 'noopener noreferrer' : rel;
     return (
       <a
-        href={href}
+        href={safeHref}
         onClick={onClick}
         target={target}
-        rel={rel}
+        rel={safeRel}
         title={title}
         aria-label={ariaLabel}
         className={combinedClassName}

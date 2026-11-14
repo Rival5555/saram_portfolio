@@ -1,14 +1,19 @@
 import React from 'react';
 import { ArrowDown, ArrowUpRight, MapPin, FileDown } from 'lucide-react';
 import { personalInfo } from '../../data/personalInfo';
+import { sanitizeUrl } from '../../utils/helpers';
 import { CoordinateGraphic } from '../../assets/illustrations/CoordinateGraphic';
 import { Container } from '../common/Container';
 import { Button } from '../common/Button';
 
 export const Hero: React.FC = () => {
   const handleResumeClick = () => {
-    if (personalInfo.contact.resumeUrl) {
-      window.open(personalInfo.contact.resumeUrl, '_blank', 'noopener,noreferrer');
+    const safeResumeUrl = sanitizeUrl(personalInfo.contact.resumeUrl);
+    if (safeResumeUrl !== '#') {
+      const newWindow = window.open(safeResumeUrl, '_blank', 'noopener,noreferrer');
+      if (newWindow) {
+        newWindow.opener = null;
+      }
     } else {
       window.print();
     }

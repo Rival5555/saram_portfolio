@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../../assets/icons/Icons';
 import { socialLinksData } from '../../data/socialLinks';
-import { isUnfilled } from '../../utils/helpers';
+import { isUnfilled, sanitizeUrl } from '../../utils/helpers';
 
 export const SocialLinks: React.FC = () => {
   return (
@@ -64,7 +64,7 @@ export const SocialLinks: React.FC = () => {
         return (
           <a
             key={item.id}
-            href={item.url}
+            href={sanitizeUrl(item.url)}
             target="_blank"
             rel="noopener noreferrer"
             style={{

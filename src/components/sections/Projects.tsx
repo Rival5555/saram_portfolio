@@ -3,7 +3,7 @@ import { ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
 import { projectsData } from '../../data/projects';
 import { personalInfo } from '../../data/personalInfo';
 import { GithubIcon } from '../../assets/icons/Icons';
-import { isUnfilled } from '../../utils/helpers';
+import { isUnfilled, sanitizeUrl } from '../../utils/helpers';
 import { Container } from '../common/Container';
 import { SectionHeading } from '../common/SectionHeading';
 
@@ -284,7 +284,7 @@ export const Projects: React.FC = () => {
                           : proj.githubUrl;
                         return (
                           <a
-                            href={resolvedUrl}
+                            href={sanitizeUrl(resolvedUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="editorial-link"
@@ -301,7 +301,7 @@ export const Projects: React.FC = () => {
 
                     {proj.demoUrl && !isUnfilled(proj.demoUrl) && (
                       <a
-                        href={proj.demoUrl}
+                        href={sanitizeUrl(proj.demoUrl)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="editorial-link"

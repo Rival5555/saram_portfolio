@@ -4,16 +4,15 @@ import { personalInfo } from '../../data/personalInfo';
 import { navigationItems } from '../../data/navigation';
 import { useScroll } from '../../hooks/useScroll';
 import { THEME_STORAGE_KEY, BREAKPOINTS } from '../../utils/constants';
+import { safeGetStorage, safeSetStorage } from '../../utils/helpers';
 import { Container } from '../common/Container';
 import { MobileMenu } from './MobileMenu';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
-      if (saved === 'dark' || saved === 'light') return saved;
-    }
+    const saved = safeGetStorage(THEME_STORAGE_KEY);
+    if (saved === 'dark' || saved === 'light') return saved;
     return 'light';
   });
 
@@ -21,7 +20,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    safeSetStorage(THEME_STORAGE_KEY, theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
       metaTheme.setAttribute('content', theme === 'dark' ? '#121412' : '#F5F3ED');
