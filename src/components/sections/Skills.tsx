@@ -1,38 +1,18 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
+import { skillsData } from '../../data/skills';
+import { Container } from '../common/Container';
+import { SectionHeading } from '../common/SectionHeading';
 
 export const Skills: React.FC = () => {
-  const { skillCategories } = portfolioData;
-
   return (
     <section id="skills" className="section" aria-label="Skills and Competencies">
-      <div className="container">
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-tag">COMPETENCIES</div>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-              gap: '1rem',
-            }}
-          >
-            <h2 className="section-title">
-              Skills & <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>capabilities.</span>
-            </h2>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8125rem',
-                color: 'var(--text-tertiary)',
-              }}
-            >
-              TYPOGRAPHIC DIRECTORY // STRICTLY VERIFIED
-            </span>
-          </div>
-        </div>
+      <Container>
+        <SectionHeading
+          tag="COMPETENCIES"
+          titlePrefix="Skills &"
+          titleHighlight="capabilities."
+          metaRight="TYPOGRAPHIC DIRECTORY // STRICTLY VERIFIED"
+        />
 
         {/* 4 Grouped Typographic Categories */}
         <div
@@ -42,7 +22,7 @@ export const Skills: React.FC = () => {
             gap: 'clamp(1.5rem, 2.5vw, 2.5rem)',
           }}
         >
-          {skillCategories.map((cat) => (
+          {skillsData.map((cat) => (
             <div
               key={cat.code}
               style={{
@@ -129,10 +109,16 @@ export const Skills: React.FC = () => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '0.5rem 0.75rem',
-                        backgroundColor: skill.isPlaceholder ? 'var(--placeholder-badge-bg)' : 'var(--bg-hover)',
-                        border: skill.isPlaceholder ? '1px dashed var(--border-strong)' : '1px solid var(--border-subtle)',
+                        backgroundColor: skill.isPlaceholder
+                          ? 'var(--placeholder-badge-bg)'
+                          : 'var(--bg-hover)',
+                        border: skill.isPlaceholder
+                          ? '1px dashed var(--border-strong)'
+                          : '1px solid var(--border-subtle)',
                         fontSize: '0.875rem',
-                        color: skill.isPlaceholder ? 'var(--placeholder-badge-text)' : 'var(--text-primary)',
+                        color: skill.isPlaceholder
+                          ? 'var(--placeholder-badge-text)'
+                          : 'var(--text-primary)',
                       }}
                     >
                       <span style={{ fontWeight: 500 }}>{skill.name}</span>
@@ -170,7 +156,7 @@ export const Skills: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

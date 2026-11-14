@@ -1,52 +1,47 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
 import { ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
-import { GithubIcon } from './Icons';
+import { projectsData } from '../../data/projects';
+import { personalInfo } from '../../data/personalInfo';
+import { GithubIcon } from '../../assets/icons/Icons';
+import { isUnfilled } from '../../utils/helpers';
+import { Container } from '../common/Container';
+import { SectionHeading } from '../common/SectionHeading';
 
 export const Projects: React.FC = () => {
-  const { projects, personal } = portfolioData;
-  const hasPlaceholders = projects.some((p) => p.isPlaceholder);
+  const hasPlaceholders = projectsData.some((p) => p.isPlaceholder);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'In Progress':
-        return { bg: 'rgba(41, 76, 59, 0.08)', color: 'var(--accent-green)', border: 'rgba(41, 76, 59, 0.3)' };
+        return {
+          bg: 'var(--accent-green-light)',
+          color: 'var(--accent-green)',
+          border: 'var(--accent-green-border)',
+        };
       case 'Research':
-        return { bg: 'rgba(119, 120, 111, 0.1)', color: 'var(--text-secondary)', border: 'var(--border-subtle)' };
+        return {
+          bg: 'rgba(119, 120, 111, 0.1)',
+          color: 'var(--text-secondary)',
+          border: 'var(--border-subtle)',
+        };
       default:
-        return { bg: 'var(--bg-hover)', color: 'var(--text-primary)', border: 'var(--border-subtle)' };
+        return {
+          bg: 'var(--bg-hover)',
+          color: 'var(--text-primary)',
+          border: 'var(--border-subtle)',
+        };
     }
   };
 
   return (
     <section id="projects" className="section" aria-label="Selected Projects">
-      <div className="container">
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-tag">PROJECT DIRECTORY</div>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-              gap: '1rem',
-            }}
-          >
-            <h2 className="section-title">
-              Selected <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>work & initiatives.</span>
-            </h2>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8125rem',
-                color: 'var(--text-tertiary)',
-              }}
-            >
-              FUTURE-READY SHOWCASE // HONEST VERIFICATION
-            </span>
-          </div>
-        </div>
+      <Container>
+        <SectionHeading
+          tag="PROJECT DIRECTORY"
+          titlePrefix="Selected"
+          titleHighlight="work & initiatives."
+          metaRight="FUTURE-READY SHOWCASE // HONEST VERIFICATION"
+        />
 
         {/* Editorial Notice Banner (only shown while placeholder entries exist) */}
         {hasPlaceholders && (
@@ -66,7 +61,22 @@ export const Projects: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <FolderGit2 size={18} color="var(--accent-green)" />
               <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Notice on Projects:</strong> The entries below represent structured blueprints for upcoming academic and research work. Replace them seamlessly in <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', backgroundColor: 'var(--bg-hover)', padding: '0.1rem 0.35rem' }}>portfolioData.ts</code>.
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                  Notice on Projects:
+                </strong>{' '}
+                The entries below represent structured blueprints for upcoming academic and research
+                work. Replace them seamlessly in{' '}
+                <code
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.8125rem',
+                    backgroundColor: 'var(--bg-hover)',
+                    padding: '0.1rem 0.35rem',
+                  }}
+                >
+                  src/data/projects.ts
+                </code>
+                .
               </p>
             </div>
             <span
@@ -89,7 +99,7 @@ export const Projects: React.FC = () => {
             gap: 'clamp(1.5rem, 3vw, 2.5rem)',
           }}
         >
-          {projects.map((proj, idx) => {
+          {projectsData.map((proj, idx) => {
             const badgeStyle = getStatusBadge(proj.status);
 
             return (
@@ -177,7 +187,14 @@ export const Projects: React.FC = () => {
                   </h3>
 
                   {/* Structured Problem & Approach */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.75rem' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1rem',
+                      marginBottom: '1.75rem',
+                    }}
+                  >
                     <div>
                       <div
                         style={{
@@ -230,7 +247,6 @@ export const Projects: React.FC = () => {
 
                 {/* Footer: Tech Stack & Links */}
                 <div>
-                  {/* Verified Tech Stack */}
                   <div
                     style={{
                       display: 'flex',
@@ -260,25 +276,30 @@ export const Projects: React.FC = () => {
 
                   {/* Repository / Demo Link */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                    {proj.githubUrl && (() => {
-                      const isUnfilledRepo = proj.githubUrl.includes('[');
-                      const resolvedUrl = isUnfilledRepo ? personal.contact.github : proj.githubUrl;
-                      return (
-                        <a
-                          href={resolvedUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="editorial-link"
-                          style={{ fontSize: '0.8125rem' }}
-                        >
-                          <GithubIcon size={14} />
-                          <span>{isUnfilledRepo ? 'GitHub Profile (Repo Pending)' : 'View Repository'}</span>
-                          <ExternalLink size={12} className="icon-arrow" />
-                        </a>
-                      );
-                    })()}
+                    {proj.githubUrl &&
+                      (() => {
+                        const unfilledRepo = isUnfilled(proj.githubUrl);
+                        const resolvedUrl = unfilledRepo
+                          ? personalInfo.contact.github
+                          : proj.githubUrl;
+                        return (
+                          <a
+                            href={resolvedUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="editorial-link"
+                            style={{ fontSize: '0.8125rem' }}
+                          >
+                            <GithubIcon size={14} />
+                            <span>
+                              {unfilledRepo ? 'GitHub Profile (Repo Pending)' : 'View Repository'}
+                            </span>
+                            <ExternalLink size={12} className="icon-arrow" />
+                          </a>
+                        );
+                      })()}
 
-                    {proj.demoUrl && !proj.demoUrl.includes('[') && (
+                    {proj.demoUrl && !isUnfilled(proj.demoUrl) && (
                       <a
                         href={proj.demoUrl}
                         target="_blank"
@@ -297,7 +318,7 @@ export const Projects: React.FC = () => {
             );
           })}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

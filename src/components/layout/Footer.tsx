@@ -1,16 +1,11 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
-import { ArrowUp } from 'lucide-react';
+import { personalInfo } from '../../data/personalInfo';
+import { Container } from '../common/Container';
+import { BackToTop } from '../common/BackToTop';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export const Footer: React.FC = () => {
-  const { personal } = portfolioData;
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer
       style={{
@@ -22,7 +17,7 @@ export const Footer: React.FC = () => {
       }}
       aria-label="Site Footer"
     >
-      <div className="container">
+      <Container>
         <div
           style={{
             display: 'flex',
@@ -34,7 +29,14 @@ export const Footer: React.FC = () => {
         >
           {/* Identity & Origin */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.625rem', marginBottom: '0.35rem' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '0.625rem',
+                marginBottom: '0.35rem',
+              }}
+            >
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -45,8 +47,14 @@ export const Footer: React.FC = () => {
               >
                 H × I
               </span>
-              <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
-                {personal.fullName}
+              <span
+                style={{
+                  fontWeight: 600,
+                  fontSize: '0.9375rem',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                {personalInfo.fullName}
               </span>
             </div>
 
@@ -57,7 +65,7 @@ export const Footer: React.FC = () => {
                 color: 'var(--text-secondary)',
               }}
             >
-              Artificial Intelligence × Public Service × Communication — {personal.location}
+              Artificial Intelligence × Public Service × Communication — {personalInfo.location}
             </div>
           </div>
 
@@ -70,37 +78,15 @@ export const Footer: React.FC = () => {
               textAlign: 'center',
             }}
           >
-            © {CURRENT_YEAR} {personal.fullName} · All rights reserved.
+            © {CURRENT_YEAR} {personalInfo.fullName} · All rights reserved.
             <div style={{ fontSize: '0.6875rem', marginTop: '0.2rem' }}>
               Designed with Swiss Minimalist Editorial Principles
             </div>
           </div>
 
-          {/* Back to top button */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              padding: '0.5rem 0.875rem',
-              backgroundColor: 'transparent',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-primary)',
-              cursor: 'pointer',
-              transition: 'all var(--transition-fast)',
-            }}
-            className="back-to-top-btn"
-            aria-label="Scroll back to top of page"
-          >
-            <span>Top</span>
-            <ArrowUp size={14} />
-          </button>
+          <BackToTop />
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

@@ -1,14 +1,14 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
-import { CoordinateGraphic } from './CoordinateGraphic';
 import { ArrowDown, ArrowUpRight, MapPin, FileDown } from 'lucide-react';
+import { personalInfo } from '../../data/personalInfo';
+import { CoordinateGraphic } from '../../assets/illustrations/CoordinateGraphic';
+import { Container } from '../common/Container';
+import { Button } from '../common/Button';
 
 export const Hero: React.FC = () => {
-  const { personal } = portfolioData;
-
   const handleResumeClick = () => {
-    if (personal.contact.resumeUrl) {
-      window.open(personal.contact.resumeUrl, '_blank', 'noopener,noreferrer');
+    if (personalInfo.contact.resumeUrl) {
+      window.open(personalInfo.contact.resumeUrl, '_blank', 'noopener,noreferrer');
     } else {
       window.print();
     }
@@ -28,8 +28,7 @@ export const Hero: React.FC = () => {
         justifyContent: 'center',
       }}
     >
-      <div className="container">
-        {/* Editorial Flex/Grid: Text on Left, Coordinate Art on Right */}
+      <Container>
         <div className="hero-editorial-wrapper">
           {/* Main Content Column */}
           <div className="hero-text-col">
@@ -53,7 +52,7 @@ export const Hero: React.FC = () => {
                   }}
                   aria-hidden="true"
                 />
-                {personal.taglineEyebrow}
+                {personalInfo.taglineEyebrow}
               </span>
 
               <span
@@ -67,14 +66,14 @@ export const Hero: React.FC = () => {
                 }}
               >
                 <MapPin size={13} color="var(--accent-green)" />
-                {personal.location}
+                {personalInfo.location}
               </span>
             </div>
 
             {/* Main Editorial Headline */}
             <h1
               style={{
-                fontSize: 'clamp(2.5rem, 5.5vw, 4.75rem)',
+                fontSize: 'var(--text-hero)',
                 fontWeight: 400,
                 lineHeight: 1.08,
                 letterSpacing: '-0.035em',
@@ -100,7 +99,7 @@ export const Hero: React.FC = () => {
                 letterSpacing: '-0.01em',
               }}
             >
-              {personal.bio.heroParagraph}
+              {personalInfo.bio.heroParagraph}
             </p>
 
             {/* Calls to Action */}
@@ -112,34 +111,29 @@ export const Hero: React.FC = () => {
                 gap: '1rem',
               }}
             >
-              <a href="#projects" className="btn-primary">
+              <Button variant="primary" href="#projects">
                 <span>Explore my work</span>
                 <ArrowDown size={16} />
-              </a>
+              </Button>
 
-              <a href="#contact" className="btn-secondary">
+              <Button variant="secondary" href="#contact">
                 <span>Get in touch</span>
                 <ArrowUpRight size={16} />
-              </a>
+              </Button>
 
-              <button
-                type="button"
+              <Button
+                variant="secondary"
                 onClick={handleResumeClick}
-                className="btn-secondary"
                 title="Print or save Swiss-style CV as PDF"
-                aria-label="Download or print CV"
+                ariaLabel="Download or print CV"
               >
                 <span>CV / Resume</span>
                 <FileDown size={15} />
-              </button>
+              </Button>
 
-              <a
-                href="#about"
-                className="editorial-link"
-                style={{ marginLeft: '0.5rem' }}
-              >
+              <Button variant="editorial" href="#about" style={{ marginLeft: '0.5rem' }}>
                 <span>Read perspective</span>
-              </a>
+              </Button>
             </div>
           </div>
 
@@ -180,10 +174,10 @@ export const Hero: React.FC = () => {
               letterSpacing: '0.04em',
             }}
           >
-            REF: {personal.coordinates}
+            REF: {personalInfo.coordinates}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

@@ -1,50 +1,29 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
 import { Clock, MapPin, Edit3 } from 'lucide-react';
+import { experienceData } from '../../data/experience';
+import { Container } from '../common/Container';
+import { SectionHeading } from '../common/SectionHeading';
 
 export const Experience: React.FC = () => {
-  const { experience } = portfolioData;
-
   return (
     <section id="experience" className="section" aria-label="Professional Experience">
-      <div className="container">
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-tag">CHRONOLOGY</div>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-              gap: '1rem',
-            }}
-          >
-            <h2 className="section-title">
-              Professional <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>experience.</span>
-            </h2>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8125rem',
-                color: 'var(--text-tertiary)',
-              }}
-            >
-              EDITORIAL TIMELINE // 0{experience.length} ENTRIES
-            </span>
-          </div>
-        </div>
+      <Container>
+        <SectionHeading
+          tag="CHRONOLOGY"
+          titlePrefix="Professional"
+          titleHighlight="experience."
+          metaRight={`EDITORIAL TIMELINE // 0${experienceData.length} ENTRIES`}
+        />
 
         {/* Editorial Vertical List with Thin Dividers */}
         <div style={{ borderTop: '1px solid var(--border-subtle)' }}>
-          {experience.map((item) => (
+          {experienceData.map((item) => (
             <article
               key={item.id}
               style={{
                 paddingTop: 'clamp(2rem, 4vw, 3rem)',
                 paddingBottom: 'clamp(2rem, 4vw, 3rem)',
                 borderBottom: '1px solid var(--border-subtle)',
-                transition: 'background-color var(--transition-fast)',
               }}
               className="experience-item-row"
             >
@@ -58,7 +37,14 @@ export const Experience: React.FC = () => {
               >
                 {/* Column 1: Sequence & Time Period */}
                 <div className="exp-meta-col">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
                     <span
                       style={{
                         fontFamily: 'var(--font-mono)',
@@ -117,7 +103,7 @@ export const Experience: React.FC = () => {
                 <div className="exp-title-col">
                   <h3
                     style={{
-                      fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)',
+                      fontSize: 'var(--text-xl)',
                       fontWeight: 500,
                       letterSpacing: '-0.02em',
                       color: 'var(--text-primary)',
@@ -196,7 +182,7 @@ export const Experience: React.FC = () => {
             </article>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

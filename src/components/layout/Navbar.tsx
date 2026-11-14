@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { portfolioData } from '../data/portfolioData';
 import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
+import { personalInfo } from '../../data/personalInfo';
+import { navigationItems } from '../../data/navigation';
+import { useScroll } from '../../hooks/useScroll';
+import { THEME_STORAGE_KEY, BREAKPOINTS } from '../../utils/constants';
+import { Container } from '../common/Container';
+import { MobileMenu } from './MobileMenu';
 
 export const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('');
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      const saved = window.localStorage.getItem('portfolio-theme');
+      const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
       if (saved === 'dark' || saved === 'light') return saved;
     }
     return 'light';
   });
-  const { personal, navigation } = portfolioData;
+
+  const { isScrolled, activeSection } = useScroll(navigationItems);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem('portfolio-theme', theme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
       metaTheme.setAttribute('content', theme === 'dark' ? '#121412' : '#F5F3ED');
@@ -29,49 +33,13 @@ export const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-      if (window.scrollY < 180) {
-        setActiveSection('');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Active section ScrollSpy
-  useEffect(() => {
-    const sectionIds = navigation.map((item) => item.href.replace('#', ''));
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
-          }
-        });
-      },
-      { rootMargin: '-25% 0px -60% 0px', threshold: 0 }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [navigation]);
-
-  // Close mobile menu on Esc key or resize
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
     const handleResize = () => {
-      if (window.innerWidth >= 860 && mobileMenuOpen) {
+      if (window.innerWidth >= BREAKPOINTS.md && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
@@ -105,7 +73,7 @@ export const Navbar: React.FC = () => {
         Skip to main content
       </a>
 
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Left: Brand Monogram & Full Name */}
         <a
           href="#"
@@ -129,7 +97,7 @@ export const Navbar: React.FC = () => {
               letterSpacing: '0.04em',
             }}
           >
-            SZ
+            {personalInfo.monogram}
           </span>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
@@ -141,7 +109,7 @@ export const Navbar: React.FC = () => {
                 lineHeight: 1.15,
               }}
             >
-              {personal.fullName}
+              {personalInfo.fullName}
             </span>
             <span
               style={{
@@ -151,7 +119,7 @@ export const Navbar: React.FC = () => {
                 letterSpacing: '0.02em',
               }}
             >
-              {personal.professionalTitle}
+              {personalInfo.professionalTitle}
             </span>
           </div>
         </a>
@@ -162,7 +130,7 @@ export const Navbar: React.FC = () => {
             aria-label="Primary Navigation"
             style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}
           >
-            {navigation.map((item) => {
+            {navigationItems.map((item) => {
               const isActive = activeSection === item.href;
               return (
                 <a
@@ -177,30 +145,29 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Availability Indicator */}
-          {personal.availability.isConfirmed && (
+          {personalInfo.availability.isConfirmed && (
             <div
               className="status-pill"
-              title={personal.availability.status}
-              aria-label={`Status: ${personal.availability.status}`}
+              title={personalInfo.availability.status}
+              aria-label={`Status: ${personalInfo.availability.status}`}
             >
               <span className="pulse-dot" aria-hidden="true" />
               <span>Available</span>
             </div>
           )}
 
-          {/* Theme Toggle */}
           <button
             type="button"
             onClick={toggleTheme}
             className="theme-toggle-btn"
-            aria-label={theme === 'dark' ? 'Switch to light editorial theme' : 'Switch to dark editorial theme'}
+            aria-label={
+              theme === 'dark' ? 'Switch to light editorial theme' : 'Switch to dark editorial theme'
+            }
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
 
-          {/* Quick Contact CTA */}
           <a
             href="#contact"
             className="editorial-link"
@@ -212,12 +179,17 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Controls: Theme Toggle + Hamburger */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }} className="mobile-menu-trigger-group">
+        <div
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+          className="mobile-menu-trigger-group"
+        >
           <button
             type="button"
             onClick={toggleTheme}
             className="mobile-menu-trigger"
-            aria-label={theme === 'dark' ? 'Switch to light editorial theme' : 'Switch to dark editorial theme'}
+            aria-label={
+              theme === 'dark' ? 'Switch to light editorial theme' : 'Switch to dark editorial theme'
+            }
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -232,77 +204,15 @@ export const Navbar: React.FC = () => {
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-      </div>
+      </Container>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            backgroundColor: 'var(--bg-ivory)',
-            borderBottom: '1px solid var(--border-subtle)',
-            padding: '1.5rem var(--gutter) 2rem',
-            boxShadow: '0 10px 25px -5px rgba(23, 25, 22, 0.08)',
-          }}
-          className="fade-in-up"
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            {personal.availability.isConfirmed && (
-              <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)' }}>
-                <div className="status-pill">
-                  <span className="pulse-dot" aria-hidden="true" />
-                  <span>{personal.availability.status}</span>
-                </div>
-              </div>
-            )}
-
-            <nav
-              aria-label="Mobile Navigation"
-              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-            >
-              {navigation.map((item) => {
-                const isActive = activeSection === item.href;
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    style={{
-                      fontSize: '1.125rem',
-                      fontWeight: 500,
-                      color: isActive ? 'var(--accent-green)' : 'var(--text-primary)',
-                      padding: '0.35rem 0',
-                      borderBottom: '1px solid var(--border-subtle)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <span>{item.label}</span>
-                    <ArrowUpRight size={16} color="var(--accent-green)" />
-                  </a>
-                );
-              })}
-            </nav>
-
-            <div style={{ paddingTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn-primary"
-                style={{ width: '100%' }}
-              >
-                <span>Get in touch</span>
-                <ArrowUpRight size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        navigation={navigationItems}
+        activeSection={activeSection}
+        availability={personalInfo.availability}
+      />
     </header>
   );
 };

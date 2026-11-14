@@ -1,10 +1,10 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
 import { ShieldCheck, MessageSquareCode, BrainCircuit } from 'lucide-react';
+import { personalInfo } from '../../data/personalInfo';
+import { Container } from '../common/Container';
+import { SectionHeading } from '../common/SectionHeading';
 
 export const About: React.FC = () => {
-  const { personal } = portfolioData;
-
   const pillarIcons = [
     <ShieldCheck key="shield" size={22} color="var(--accent-green)" />,
     <MessageSquareCode key="message" size={22} color="var(--accent-green)" />,
@@ -13,14 +13,12 @@ export const About: React.FC = () => {
 
   return (
     <section id="about" className="section" aria-label="About perspective">
-      <div className="container">
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-tag">PERSPECTIVE & BACKGROUND</div>
-          <h2 className="section-title">
-            A different <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>perspective.</span>
-          </h2>
-        </div>
+      <Container>
+        <SectionHeading
+          tag="PERSPECTIVE & BACKGROUND"
+          titlePrefix="A different"
+          titleHighlight="perspective."
+        />
 
         {/* Lead Narrative Grid */}
         <div
@@ -43,13 +41,13 @@ export const About: React.FC = () => {
                 paddingLeft: '1.5rem',
               }}
             >
-              {personal.bio.perspectiveIntro}
+              {personalInfo.bio.perspectiveIntro}
             </p>
           </div>
 
           <div className="about-body-col">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {personal.bio.perspectiveBody.map((paragraph, index) => (
+              {personalInfo.bio.perspectiveBody.map((paragraph, index) => (
                 <p
                   key={index}
                   style={{
@@ -73,7 +71,7 @@ export const About: React.FC = () => {
             gap: '1.5rem',
           }}
         >
-          {personal.bio.pillars.map((pillar, idx) => (
+          {personalInfo.bio.pillars.map((pillar, idx) => (
             <div
               key={pillar.number}
               style={{
@@ -160,7 +158,7 @@ export const About: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

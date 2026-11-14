@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Sliders, X, FileCode } from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
-
-const isUnfilled = (val: string) => !val || val.includes('[') || val.includes(']');
+import { portfolioData } from '../../data/portfolioData';
+import { isUnfilled } from '../../utils/helpers';
 
 export const ConfigurationGuide: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +9,8 @@ export const ConfigurationGuide: React.FC = () => {
 
   const isGuideEnabled =
     import.meta.env.DEV ||
-    (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('guide') === '1');
+    (typeof window !== 'undefined' &&
+      new URLSearchParams(window.location.search).get('guide') === '1');
 
   if (!isGuideEnabled) {
     return null;
@@ -47,17 +47,26 @@ export const ConfigurationGuide: React.FC = () => {
     },
     {
       label: exp01?.organization || '[BDE ORGANIZATION]',
-      status: !exp01 || isUnfilled(exp01.organization) || exp01.isPlaceholderDescription ? 'Pending' : 'Verified',
+      status:
+        !exp01 || isUnfilled(exp01.organization) || exp01.isPlaceholderDescription
+          ? 'Pending'
+          : 'Verified',
       description: 'Business Development organization & dates',
     },
     {
       label: exp02?.role || '[MOTORWAY POLICE JOB TITLE]',
-      status: !exp02 || isUnfilled(exp02.role) || exp02.isPlaceholderDescription ? 'Pending' : 'Verified',
+      status:
+        !exp02 || isUnfilled(exp02.role) || exp02.isPlaceholderDescription
+          ? 'Pending'
+          : 'Verified',
       description: 'Your verified NHMP designation',
     },
     {
       label: exp03?.organization || '[CALL CENTER COMPANY]',
-      status: !exp03 || isUnfilled(exp03.organization) || exp03.isPlaceholderDescription ? 'Pending' : 'Verified',
+      status:
+        !exp03 || isUnfilled(exp03.organization) || exp03.isPlaceholderDescription
+          ? 'Pending'
+          : 'Verified',
       description: 'Organization name for 2-year tenure',
     },
     {
@@ -89,7 +98,6 @@ export const ConfigurationGuide: React.FC = () => {
 
   return (
     <>
-      {/* Floating trigger button in corner */}
       <div
         style={{
           position: 'fixed',
@@ -123,7 +131,6 @@ export const ConfigurationGuide: React.FC = () => {
         </button>
       </div>
 
-      {/* Guide Modal / Drawer */}
       {isOpen && (
         <div
           style={{
@@ -154,7 +161,6 @@ export const ConfigurationGuide: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
             className="fade-in-up"
           >
-            {/* Header */}
             <div
               style={{
                 display: 'flex',
@@ -187,23 +193,20 @@ export const ConfigurationGuide: React.FC = () => {
               </button>
             </div>
 
-            {/* Quick Instruction */}
             <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-              All portfolio content is organized in a single configuration file:
-              <br />
+              All portfolio content is organized modularly in{' '}
               <code
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.8125rem',
                   backgroundColor: 'var(--bg-hover)',
-                  padding: '0.2rem 0.5rem',
-                  display: 'inline-block',
-                  marginTop: '0.35rem',
+                  padding: '0.15rem 0.45rem',
                   border: '1px solid var(--border-subtle)',
                 }}
               >
-                src/data/portfolioData.ts
+                src/data/
               </code>
+              :
             </p>
 
             <h4
@@ -219,7 +222,6 @@ export const ConfigurationGuide: React.FC = () => {
               Editable Placeholders Checklist
             </h4>
 
-            {/* Checklist */}
             <div
               style={{
                 display: 'flex',
@@ -256,9 +258,18 @@ export const ConfigurationGuide: React.FC = () => {
                         fontFamily: 'var(--font-mono)',
                         fontSize: '0.625rem',
                         padding: '0.1rem 0.35rem',
-                        backgroundColor: item.status === 'Verified' ? 'var(--accent-green-light)' : 'var(--bg-hover)',
-                        color: item.status === 'Verified' ? 'var(--accent-green)' : 'var(--text-tertiary)',
-                        border: item.status === 'Verified' ? '1px solid var(--accent-green-border)' : '1px solid var(--border-subtle)',
+                        backgroundColor:
+                          item.status === 'Verified'
+                            ? 'var(--accent-green-light)'
+                            : 'var(--bg-hover)',
+                        color:
+                          item.status === 'Verified'
+                            ? 'var(--accent-green)'
+                            : 'var(--text-tertiary)',
+                        border:
+                          item.status === 'Verified'
+                            ? '1px solid var(--accent-green-border)'
+                            : '1px solid var(--border-subtle)',
                       }}
                     >
                       {item.status}
@@ -282,7 +293,10 @@ export const ConfigurationGuide: React.FC = () => {
                 marginBottom: '1.5rem',
               }}
             >
-              <strong style={{ color: 'var(--text-primary)' }}>Integrity Note:</strong> As per Swiss design principles, no fake awards or proficiency percentages are present. When you complete real AI projects or obtain verified credentials, simply add them to <code style={{ fontFamily: 'var(--font-mono)' }}>portfolioData.ts</code>.
+              <strong style={{ color: 'var(--text-primary)' }}>Integrity Note:</strong> As per Swiss
+              design principles, no fake awards or proficiency percentages are present. When you
+              complete real AI projects or obtain verified credentials, simply add them inside{' '}
+              <code style={{ fontFamily: 'var(--font-mono)' }}>src/data/</code>.
             </div>
 
             <button
@@ -296,14 +310,6 @@ export const ConfigurationGuide: React.FC = () => {
           </div>
         </div>
       )}
-
-      <style>{`
-        .guide-trigger-btn:hover {
-          background-color: var(--accent-green) !important;
-          border-color: var(--accent-green) !important;
-          transform: translateY(-2px);
-        }
-      `}</style>
     </>
   );
 };

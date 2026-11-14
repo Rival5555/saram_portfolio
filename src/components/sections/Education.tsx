@@ -1,20 +1,18 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolioData';
 import { GraduationCap, BookOpen, AlertCircle } from 'lucide-react';
+import { educationData } from '../../data/education';
+import { Container } from '../common/Container';
+import { SectionHeading } from '../common/SectionHeading';
 
 export const Education: React.FC = () => {
-  const { education } = portfolioData;
-
   return (
     <section id="education" className="section" aria-label="Education & Academic Path">
-      <div className="container">
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-tag">ACADEMIC FOUNDATION</div>
-          <h2 className="section-title">
-            Education & <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>curriculum.</span>
-          </h2>
-        </div>
+      <Container>
+        <SectionHeading
+          tag="ACADEMIC FOUNDATION"
+          titlePrefix="Education &"
+          titleHighlight="curriculum."
+        />
 
         {/* Editorial Layout */}
         <div
@@ -60,7 +58,7 @@ export const Education: React.FC = () => {
                 }}
               >
                 <GraduationCap size={15} />
-                <span>{education.degreeStatus}</span>
+                <span>{educationData.degreeStatus}</span>
               </div>
 
               <div
@@ -70,7 +68,7 @@ export const Education: React.FC = () => {
                   color: 'var(--text-secondary)',
                 }}
               >
-                {education.statusPeriod}
+                {educationData.statusPeriod}
               </div>
             </div>
 
@@ -83,7 +81,7 @@ export const Education: React.FC = () => {
                 marginBottom: '0.5rem',
               }}
             >
-              {education.degree}
+              {educationData.degree}
             </h3>
 
             <div
@@ -94,7 +92,7 @@ export const Education: React.FC = () => {
                 marginBottom: '1.5rem',
               }}
             >
-              {education.institution}
+              {educationData.institution}
               <span
                 style={{
                   color: 'var(--text-tertiary)',
@@ -103,7 +101,7 @@ export const Education: React.FC = () => {
                   fontFamily: 'var(--font-mono)',
                 }}
               >
-                // {education.location}
+                // {educationData.location}
               </span>
             </div>
 
@@ -119,7 +117,11 @@ export const Education: React.FC = () => {
                 marginTop: '1.5rem',
               }}
             >
-              <AlertCircle size={16} color="var(--accent-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <AlertCircle
+                size={16}
+                color="var(--accent-green)"
+                style={{ flexShrink: 0, marginTop: '2px' }}
+              />
               <p
                 style={{
                   fontSize: '0.875rem',
@@ -127,8 +129,9 @@ export const Education: React.FC = () => {
                   lineHeight: 1.55,
                 }}
               >
-                Active undergraduate student pursuing rigorous core concepts in computational intelligence.
-                Coursework and laboratory modules will be updated as semester milestones are certified.
+                Active undergraduate student pursuing rigorous core concepts in computational
+                intelligence. Coursework and laboratory modules will be updated as semester
+                milestones are certified.
               </p>
             </div>
           </div>
@@ -174,7 +177,7 @@ export const Education: React.FC = () => {
                 gap: '0.875rem',
               }}
             >
-              {education.academicPillars.map((pillar, idx) => (
+              {educationData.academicPillars.map((pillar, idx) => (
                 <li
                   key={idx}
                   style={{
@@ -211,11 +214,11 @@ export const Education: React.FC = () => {
                 fontStyle: 'italic',
               }}
             >
-              * {education.note}
+              * {educationData.note}
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
