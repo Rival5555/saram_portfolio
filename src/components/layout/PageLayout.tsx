@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { Reveal } from '../effects/Reveal';
 import { CustomCursor } from '../effects/CustomCursor';
-import { ConfigurationGuide } from '../common/ConfigurationGuide';
+
+const ConfigurationGuide = import.meta.env.DEV
+  ? lazy(() =>
+      import('../common/ConfigurationGuide').then((mod) => ({ default: mod.ConfigurationGuide }))
+    )
+  : null;
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -17,7 +22,11 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />
-      <ConfigurationGuide />
+      {ConfigurationGuide && (
+        <Suspense fallback={null}>
+          <ConfigurationGuide />
+        </Suspense>
+      )}
     </div>
   );
 };

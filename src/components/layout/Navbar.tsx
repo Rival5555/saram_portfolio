@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { personalInfo } from '../../data/personalInfo';
 import { navigationItems } from '../../data/navigation';
 import { useScroll } from '../../hooks/useScroll';
 import { THEME_STORAGE_KEY, BREAKPOINTS } from '../../utils/constants';
-import { safeGetStorage, safeSetStorage } from '../../utils/helpers';
+import { safeGetStorage, safeSetStorage, scrollToTop } from '../../utils/helpers';
 import { Container } from '../common/Container';
 import { MobileMenu } from './MobileMenu';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = safeGetStorage(THEME_STORAGE_KEY);
     if (saved === 'dark' || saved === 'light') return saved;
@@ -17,6 +18,47 @@ export const Navbar: React.FC = () => {
   });
 
   const { isScrolled, activeSection } = useScroll(navigationItems);
+
+  const isHomeRoute = (): boolean => {
+    if (typeof window === 'undefined') return true;
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
+    return path === '/' || path === '/index.html';
+  };
+
+  const resolveSectionHref = (hashHref: string): string => {
+    if (isHomeRoute()) return hashHref;
+    return `/${hashHref}`;
+  };
+
+  const handleSectionNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hashHref: string) => {
+    setMobileMenuOpen(false);
+    const targetId = hashHref.replace(/^#/, '');
+    const existingEl = document.getElementById(targetId);
+
+    if (existingEl) {
+      e.preventDefault();
+      window.history.pushState(null, '', hashHref);
+      existingEl.scrollIntoView({ behavior: 'smooth' });
+    } else if (!isHomeRoute()) {
+      e.preventDefault();
+      window.history.pushState(null, '', `/${hashHref}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
+  const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setMobileMenuOpen(false);
+    e.preventDefault();
+    if (isHomeRoute()) {
+      if (window.location.hash) {
+        window.history.pushState(null, '', '/');
+      }
+      scrollToTop();
+    } else {
+      window.history.pushState(null, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -42,30 +84,40 @@ export const Navbar: React.FC = () => {
         setMobileMenuOpen(false);
       }
     };
+    const handlePointerDownOutside = (e: MouseEvent) => {
+      if (
+        mobileMenuOpen &&
+        headerRef.current &&
+        e.target instanceof Node &&
+        !headerRef.current.contains(e.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('resize', handleResize);
+    document.addEventListener('mousedown', handlePointerDownOutside);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handlePointerDownOutside);
     };
   }, [mobileMenuOpen]);
 
   return (
     <header
+      ref={headerRef}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
-        paddingTop: isScrolled ? '0.875rem' : '1.25rem',
-        paddingBottom: isScrolled ? '0.875rem' : '1.25rem',
-        backgroundColor: isScrolled ? 'var(--bg-header-scrolled)' : 'var(--bg-ivory)',
-        backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-        boxShadow: isScrolled ? '0 2px 12px rgba(23, 25, 22, 0.04)' : 'none',
-        transition: 'all var(--transition-smooth)',
+        paddingTop: isScrolled ? '0.875rem' : '1.125rem',
+        paddingBottom: isScrolled ? '0.875rem' : '1.125rem',
+        backgroundColor: 'var(--bg-ivory)',
+        borderBottom: '1px solid var(--border-subtle)',
+        transition: 'padding var(--transition-smooth), background-color var(--transition-fast)',
       }}
     >
       <a href="#main-content" className="skip-to-content">
@@ -75,25 +127,26 @@ export const Navbar: React.FC = () => {
       <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Left: Brand Monogram & Full Name */}
         <a
-          href="#"
+          href="/"
+          onClick={handleBrandClick}
           className="brand-logo"
           style={{
             display: 'inline-flex',
             alignItems: 'baseline',
-            gap: '0.625rem',
+            gap: '0.75rem',
             textDecoration: 'none',
           }}
-          aria-label="Back to top"
+          title="Back to home"
         >
           <span
             style={{
               fontFamily: 'var(--font-mono)',
               fontWeight: 600,
-              fontSize: '0.8125rem',
+              fontSize: '0.75rem',
               color: 'var(--accent-green)',
-              padding: '0.2rem 0.45rem',
+              padding: '0.15rem 0.4rem',
               border: '1px solid var(--accent-green)',
-              letterSpacing: '0.04em',
+              letterSpacing: '0.06em',
             }}
           >
             {personalInfo.monogram}
@@ -101,7 +154,7 @@ export const Navbar: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
               style={{
-                fontWeight: 600,
+                fontWeight: 500,
                 fontSize: '0.9375rem',
                 letterSpacing: '-0.02em',
                 color: 'var(--text-primary)',
@@ -114,8 +167,9 @@ export const Navbar: React.FC = () => {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.625rem',
-                color: 'var(--text-secondary)',
-                letterSpacing: '0.02em',
+                color: 'var(--text-tertiary)',
+                letterSpacing: '0.03em',
+                textTransform: 'uppercase',
               }}
             >
               {personalInfo.professionalTitle}
@@ -123,37 +177,46 @@ export const Navbar: React.FC = () => {
           </div>
         </a>
 
-        {/* Center / Right: Desktop Navigation Links & Availability */}
+        {/* Center / Right: Desktop Navigation Links */}
         <div className="desktop-nav-group">
           <nav
             aria-label="Primary Navigation"
-            style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '1.625rem' }}
           >
-            {navigationItems.map((item) => {
+            {navigationItems.map((item, idx) => {
               const isActive = activeSection === item.href;
               return (
                 <a
                   key={item.href}
-                  href={item.href}
+                  href={resolveSectionHref(item.href)}
+                  onClick={(e) => handleSectionNavClick(e, item.href)}
                   aria-current={isActive ? 'true' : undefined}
                   className={`nav-link-item ${isActive ? 'active' : ''}`}
                 >
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.6875rem',
+                      color: isActive ? 'var(--accent-green)' : 'var(--text-tertiary)',
+                      marginRight: '0.3rem',
+                    }}
+                  >
+                    0{idx + 1}
+                  </span>
                   {item.label}
                 </a>
               );
             })}
           </nav>
 
-          {personalInfo.availability.isConfirmed && (
-            <div
-              className="status-pill"
-              title={personalInfo.availability.status}
-              aria-label={`Status: ${personalInfo.availability.status}`}
-            >
-              <span className="pulse-dot" aria-hidden="true" />
-              <span>Available</span>
-            </div>
-          )}
+          <div
+            style={{
+              width: '1px',
+              height: '16px',
+              backgroundColor: 'var(--border-subtle)',
+            }}
+            aria-hidden="true"
+          />
 
           <button
             type="button"
@@ -168,7 +231,8 @@ export const Navbar: React.FC = () => {
           </button>
 
           <a
-            href="#contact"
+            href={resolveSectionHref('#contact')}
+            onClick={(e) => handleSectionNavClick(e, '#contact')}
             className="editorial-link"
             style={{ fontSize: '0.875rem', paddingBottom: '1px' }}
           >
@@ -197,6 +261,7 @@ export const Navbar: React.FC = () => {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             className="mobile-menu-trigger"
           >
@@ -208,6 +273,8 @@ export const Navbar: React.FC = () => {
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
+        onNavigate={handleSectionNavClick}
+        resolveHref={resolveSectionHref}
         navigation={navigationItems}
         activeSection={activeSection}
         availability={personalInfo.availability}

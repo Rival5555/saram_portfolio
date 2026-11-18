@@ -5,6 +5,11 @@ import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 
 export const NotFound: React.FC = () => {
+  const handleReturnHome = () => {
+    window.history.pushState(null, '', '/');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
   return (
     <PageLayout>
       <section
@@ -41,7 +46,7 @@ export const NotFound: React.FC = () => {
             The requested path does not exist within this portfolio directory. Return to the primary
             index to explore verified work and background.
           </p>
-          <Button variant="primary" href="/">
+          <Button variant="primary" href="/" onClick={handleReturnHome}>
             <ArrowLeft size={16} />
             <span>Return to Home</span>
           </Button>
