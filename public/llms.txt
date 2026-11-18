@@ -1,0 +1,11 @@
+# Saram Zafar — Personal Portfolio
+
+> Business Development Executive and BS Artificial Intelligence student at National Textile University, Faisalabad (2023–2028), combining public service in Pakistan's Motorway Police with customer communication.
+
+## Sections
+- [About Perspective](/#about): Discipline, strategic communication, and analytical curiosity across public service, business development, and artificial intelligence.
+- [Professional Experience](/#experience): Chronology spanning Business Development Executive, Pakistan Motorway Police, and two years in front-line customer communication.
+- [Education & Curriculum](/#education): BS Artificial Intelligence at National Textile University, Faisalabad (2023–2028).
+- [Skills & Capabilities](/#skills): Programming (Python, C++/OOP), AI/ML foundations, development tooling, and operational communication competencies.
+- [Selected Projects](/#projects): Structured academic and research AI project blueprints.
+- [Contact & Inquiries](/#contact): Direct communication channels and GitHub profile (https://github.com/Rival5555).
