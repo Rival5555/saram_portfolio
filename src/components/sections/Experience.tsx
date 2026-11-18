@@ -8,11 +8,10 @@ export const Experience: React.FC = () => {
     <section id="experience" className="section" aria-label="Professional Experience">
       <Container>
         <SectionHeading
-          index="02"
           tag="CHRONOLOGY"
           titlePrefix="Professional"
           titleHighlight="experience."
-          metaRight={`EDITORIAL TIMELINE // 0${experienceData.length} ENTRIES`}
+          metaRight="EDITORIAL TIMELINE"
         />
 
         {/* Editorial Vertical Ledger with Thin Dividers */}
@@ -35,35 +34,17 @@ export const Experience: React.FC = () => {
                   alignItems: 'flex-start',
                 }}
               >
-                {/* Column 1: Sequence, Period & Location */}
+                {/* Column 1: Period & Location */}
                 <div className="exp-meta-col">
                   <div
                     style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      gap: '0.75rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.8125rem',
+                      color: 'var(--text-secondary)',
                       marginBottom: '0.35rem',
                     }}
                   >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        fontWeight: 600,
-                        color: 'var(--accent-green)',
-                      }}
-                    >
-                      {item.sequence}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        color: 'var(--text-secondary)',
-                      }}
-                    >
-                      {item.period}
-                    </span>
+                    {item.period}
                   </div>
 
                   <div

@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface SectionHeadingProps {
-  index?: string;
   tag: string;
   titlePrefix: string;
   titleHighlight: string;
@@ -9,7 +8,6 @@ interface SectionHeadingProps {
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
-  index,
   tag,
   titlePrefix,
   titleHighlight,
@@ -19,9 +17,6 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     <div className="section-header">
       <div className="section-index-bar">
         <div className="section-tag">
-          {index && (
-            <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>{index} —</span>
-          )}
           <span>{tag}</span>
         </div>
         {metaRight && (

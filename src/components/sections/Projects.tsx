@@ -14,7 +14,6 @@ export const Projects: React.FC = () => {
     <section id="projects" className="section" aria-label="Selected Projects">
       <Container>
         <SectionHeading
-          index="05"
           tag="PROJECT DIRECTORY"
           titlePrefix="Selected"
           titleHighlight="work & initiatives."
@@ -65,7 +64,7 @@ export const Projects: React.FC = () => {
 
         {/* Swiss Editorial Case-Study Ledger */}
         <div style={{ borderTop: '1px solid var(--border-subtle)' }}>
-          {projectsData.map((proj, idx) => (
+          {projectsData.map((proj) => (
             <article key={proj.id} className="project-editorial-card">
               <div
                 style={{
@@ -75,37 +74,20 @@ export const Projects: React.FC = () => {
                   alignItems: 'flex-start',
                 }}
               >
-                {/* Column 1: Sequence, Status & Repository Link */}
+                {/* Column 1: Status & Repository Link */}
                 <div className="project-meta-col">
                   <div
                     style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      gap: '0.75rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                      color: 'var(--accent-green)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
                       marginBottom: '0.5rem',
                     }}
                   >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        fontWeight: 600,
-                        color: 'var(--accent-green)',
-                      }}
-                    >
-                      PRJ_0{idx + 1}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.75rem',
-                        color: 'var(--text-secondary)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                      }}
-                    >
-                      // {proj.status}
-                    </span>
+                    {proj.status}
                   </div>
 
                   {proj.isPlaceholder && (

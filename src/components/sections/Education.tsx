@@ -8,7 +8,6 @@ export const Education: React.FC = () => {
     <section id="education" className="section" aria-label="Education & Academic Path">
       <Container>
         <SectionHeading
-          index="03"
           tag="ACADEMIC FOUNDATION"
           titlePrefix="Education &"
           titleHighlight="curriculum."
@@ -140,9 +139,6 @@ export const Education: React.FC = () => {
                 <li
                   key={idx}
                   style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '0.875rem',
                     fontSize: '0.9375rem',
                     color: 'var(--text-primary)',
                     paddingTop: idx === 0 ? '0' : '0.75rem',
@@ -150,16 +146,6 @@ export const Education: React.FC = () => {
                     borderBottom: '1px solid var(--border-subtle)',
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      color: 'var(--accent-green)',
-                      fontWeight: 600,
-                    }}
-                  >
-                    0{idx + 1}
-                  </span>
                   <span>{pillar}</span>
                 </li>
               ))}

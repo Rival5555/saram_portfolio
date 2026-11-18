@@ -183,7 +183,7 @@ export const Navbar: React.FC = () => {
             aria-label="Primary Navigation"
             style={{ display: 'flex', alignItems: 'center', gap: '1.625rem' }}
           >
-            {navigationItems.map((item, idx) => {
+            {navigationItems.map((item) => {
               const isActive = activeSection === item.href;
               return (
                 <a
@@ -193,16 +193,6 @@ export const Navbar: React.FC = () => {
                   aria-current={isActive ? 'true' : undefined}
                   className={`nav-link-item ${isActive ? 'active' : ''}`}
                 >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.6875rem',
-                      color: isActive ? 'var(--accent-green)' : 'var(--text-tertiary)',
-                      marginRight: '0.3rem',
-                    }}
-                  >
-                    0{idx + 1}
-                  </span>
                   {item.label}
                 </a>
               );

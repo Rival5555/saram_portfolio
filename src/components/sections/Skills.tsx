@@ -8,7 +8,6 @@ export const Skills: React.FC = () => {
     <section id="skills" className="section" aria-label="Skills and Competencies">
       <Container>
         <SectionHeading
-          index="04"
           tag="COMPETENCIES"
           titlePrefix="Skills &"
           titleHighlight="capabilities."
@@ -28,9 +27,6 @@ export const Skills: React.FC = () => {
             <div key={cat.code} className="skill-card-col">
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  justifyContent: 'space-between',
                   marginBottom: '0.75rem',
                 }}
               >
@@ -44,15 +40,6 @@ export const Skills: React.FC = () => {
                   }}
                 >
                   [{cat.code}]
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.6875rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
-                  0{cat.skills.length} ITEMS
                 </span>
               </div>
 

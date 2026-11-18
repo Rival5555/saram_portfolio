@@ -66,7 +66,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           aria-label="Mobile Navigation"
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {navigation.map((item, idx) => {
+          {navigation.map((item) => {
             const isActive = activeSection === item.href;
             return (
               <a
@@ -84,18 +84,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   justifyContent: 'space-between',
                 }}
               >
-                <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.625rem' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      color: 'var(--text-tertiary)',
-                    }}
-                  >
-                    0{idx + 1}
-                  </span>
-                  <span>{item.label}</span>
-                </span>
+                <span>{item.label}</span>
                 <ArrowUpRight size={15} color="var(--accent-green)" />
               </a>
             );

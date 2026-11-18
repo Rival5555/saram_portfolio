@@ -23,7 +23,6 @@ export const Contact: React.FC = () => {
     <section id="contact" className="section" aria-label="Contact and Inquiries">
       <Container>
         <SectionHeading
-          index="06"
           tag="COMMUNICATION"
           titlePrefix="Good work starts with a"
           titleHighlight="conversation."
@@ -82,7 +81,7 @@ export const Contact: React.FC = () => {
                       marginBottom: '0.2rem',
                     }}
                   >
-                    01 // Direct Electronic Mail
+                    Direct Electronic Mail
                   </div>
                   <div
                     style={{

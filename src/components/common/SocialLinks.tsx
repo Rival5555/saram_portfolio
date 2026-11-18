@@ -6,9 +6,8 @@ import { isUnfilled, sanitizeUrl } from '../../utils/helpers';
 export const SocialLinks: React.FC = () => {
   return (
     <div>
-      {socialLinksData.map((item, idx) => {
+      {socialLinksData.map((item) => {
         const pending = isUnfilled(item.url);
-        const rowNum = `0${idx + 2}`;
 
         if (pending) {
           return (
@@ -34,7 +33,7 @@ export const SocialLinks: React.FC = () => {
                     marginBottom: '0.2rem',
                   }}
                 >
-                  {rowNum} // {item.category}
+                  {item.category}
                 </div>
                 <div
                   style={{
@@ -81,7 +80,7 @@ export const SocialLinks: React.FC = () => {
                   marginBottom: '0.2rem',
                 }}
               >
-                {rowNum} // {item.category}
+                {item.category}
               </div>
               <div
                 style={{

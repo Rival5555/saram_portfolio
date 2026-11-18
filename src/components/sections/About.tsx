@@ -8,11 +8,10 @@ export const About: React.FC = () => {
     <section id="about" className="section" aria-label="About perspective">
       <Container>
         <SectionHeading
-          index="01"
           tag="PERSPECTIVE & BACKGROUND"
           titlePrefix="A different"
           titleHighlight="perspective."
-          metaRight="THREE INTERSECTING DOMAINS"
+          metaRight="INTERSECTING DOMAINS"
         />
 
         {/* Lead Narrative Grid */}
@@ -71,34 +70,16 @@ export const About: React.FC = () => {
             <div key={pillar.number} className="about-pillar-card">
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  justifyContent: 'space-between',
-                  marginBottom: '1.25rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.6875rem',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent-green)',
+                  letterSpacing: '0.06em',
+                  fontWeight: 600,
+                  marginBottom: '0.75rem',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.8125rem',
-                    fontWeight: 600,
-                    color: 'var(--accent-green)',
-                    letterSpacing: '0.06em',
-                  }}
-                >
-                  PILLAR // {pillar.number}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.6875rem',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-tertiary)',
-                    letterSpacing: '0.06em',
-                  }}
-                >
-                  {pillar.source}
-                </span>
+                {pillar.source}
               </div>
 
               <h3

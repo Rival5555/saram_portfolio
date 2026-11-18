@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
             color: 'var(--text-tertiary)',
           }}
         >
-          <span>00 — {personalInfo.taglineEyebrow}</span>
+          <span>{personalInfo.taglineEyebrow}</span>
           <span>
             {personalInfo.location} // {personalInfo.coordinates}
           </span>

@@ -3,7 +3,7 @@ import type { ProjectItem } from '../types/project';
 export const projectsData: ProjectItem[] = [
   {
     id: 'project-01',
-    title: '[AI PROJECT 01: Intelligent Traffic Analysis / Data Simulation]',
+    title: '[AI PROJECT: Intelligent Traffic Analysis / Data Simulation]',
     isPlaceholder: true,
     problem:
       'Placeholder for verified academic AI project: Investigating patterns in flow density, vehicular movement, or automated anomaly detection.',
@@ -16,7 +16,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: 'project-02',
-    title: '[AI PROJECT 02: Conversational Classification & Sentiment Processing]',
+    title: '[AI PROJECT: Conversational Classification & Sentiment Processing]',
     isPlaceholder: true,
     problem:
       'Placeholder for applied NLP or text analysis project drawing from communication domain experience.',
@@ -29,7 +29,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: 'project-03',
-    title: '[AI PROJECT 03: Algorithmic Search & Decision Optimization]',
+    title: '[AI PROJECT: Algorithmic Search & Decision Optimization]',
     isPlaceholder: true,
     problem:
       'Placeholder for coursework exploration in heuristic search, constraint satisfaction, or agent decision trees.',
