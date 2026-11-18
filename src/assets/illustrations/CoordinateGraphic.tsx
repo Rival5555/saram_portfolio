@@ -130,13 +130,13 @@ export const CoordinateGraphic: React.FC<CoordinateGraphicProps> = ({ className 
           </text>
         </g>
 
-        {/* Hairline geometric connection polygon */}
+        {/* Hairline geometric connection triangle */}
         <polygon
-          points="300,140 220,220 140,300 140,140"
-          fill="var(--accent-green-light)"
+          points="300,140 140,300 140,140"
+          fill="none"
           stroke="var(--accent-green)"
-          strokeWidth="1"
-          strokeDasharray="3 3"
+          strokeWidth="0.85"
+          opacity="0.55"
         />
 
         {/* Marginal coordinate metrics (Swiss editorial touches) */}

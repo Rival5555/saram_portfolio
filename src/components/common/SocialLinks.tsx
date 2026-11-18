@@ -1,57 +1,49 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../../assets/icons/Icons';
 import { socialLinksData } from '../../data/socialLinks';
 import { isUnfilled, sanitizeUrl } from '../../utils/helpers';
 
 export const SocialLinks: React.FC = () => {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: '1rem',
-      }}
-    >
-      {socialLinksData.map((item) => {
+    <div>
+      {socialLinksData.map((item, idx) => {
         const pending = isUnfilled(item.url);
-        const IconComponent = item.id === 'linkedin' ? LinkedinIcon : GithubIcon;
+        const rowNum = `0${idx + 2}`;
 
         if (pending) {
           return (
             <div
               key={item.id}
               style={{
-                backgroundColor: 'var(--bg-card)',
-                border: '1px dashed var(--border-strong)',
-                padding: '1.25rem 1.5rem',
+                padding: '1.25rem 0',
+                borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                gap: '1rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                <IconComponent size={20} color="var(--text-tertiary)" />
-                <div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.6875rem',
-                      color: 'var(--text-tertiary)',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    {item.category}
-                  </div>
-                  <div
-                    style={{
-                      fontWeight: 500,
-                      fontSize: '0.9375rem',
-                      color: 'var(--text-secondary)',
-                    }}
-                  >
-                    {item.label}
-                  </div>
+              <div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.6875rem',
+                    color: 'var(--text-tertiary)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  {rowNum} // {item.category}
+                </div>
+                <div
+                  style={{
+                    fontWeight: 500,
+                    fontSize: '1rem',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  {item.label}
                 </div>
               </div>
               <span className="placeholder-indicator" style={{ marginLeft: 0 }}>
@@ -68,41 +60,43 @@ export const SocialLinks: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-subtle)',
-              padding: '1.25rem 1.5rem',
+              padding: '1.25rem 0',
+              borderBottom: '1px solid var(--border-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               textDecoration: 'none',
+              gap: '1rem',
             }}
             className="channel-card"
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-              <IconComponent size={20} color="var(--accent-green)" />
-              <div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.6875rem',
-                    color: 'var(--text-tertiary)',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {item.category}
-                </div>
-                <div
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '0.9375rem',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  {item.label}
-                </div>
+            <div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.6875rem',
+                  color: 'var(--text-tertiary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  marginBottom: '0.2rem',
+                }}
+              >
+                {rowNum} // {item.category}
+              </div>
+              <div
+                style={{
+                  fontWeight: 500,
+                  fontSize: '1rem',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                {item.label}
               </div>
             </div>
-            <ArrowUpRight size={16} color="var(--text-secondary)" className="icon-arrow" />
+            <span className="editorial-link" style={{ fontSize: '0.8125rem' }}>
+              <span>Visit Profile</span>
+              <ArrowUpRight size={14} className="icon-arrow" />
+            </span>
           </a>
         );
       })}

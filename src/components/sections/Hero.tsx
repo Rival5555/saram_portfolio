@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ArrowUpRight, MapPin, FileDown } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, FileDown } from 'lucide-react';
 import { personalInfo } from '../../data/personalInfo';
 import { sanitizeUrl } from '../../utils/helpers';
 import { CoordinateGraphic } from '../../assets/illustrations/CoordinateGraphic';
@@ -24,30 +24,57 @@ export const Hero: React.FC = () => {
       id="hero"
       aria-label="Introduction"
       style={{
-        paddingTop: 'calc(var(--nav-height) + clamp(2.5rem, 5vw, 4rem))',
-        paddingBottom: 'clamp(3rem, 6vw, 5rem)',
+        paddingTop: 'calc(var(--nav-height) + clamp(2.5rem, 5vw, 4.5rem))',
+        paddingBottom: 'clamp(3.5rem, 6vw, 5.5rem)',
         position: 'relative',
-        minHeight: '85vh',
+        minHeight: '86vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
       }}
     >
       <Container>
+        {/* Top Architectural Specification Strip */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0.75rem',
+            paddingBottom: '1rem',
+            marginBottom: 'clamp(2rem, 4vw, 3.25rem)',
+            borderBottom: '1px solid var(--border-subtle)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.75rem',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            color: 'var(--text-tertiary)',
+          }}
+        >
+          <span>00 — {personalInfo.taglineEyebrow}</span>
+          <span>
+            {personalInfo.location} // {personalInfo.coordinates}
+          </span>
+        </div>
+
         <div className="hero-editorial-wrapper">
           {/* Main Content Column */}
           <div className="hero-text-col">
-            {/* Metadata Bar / Eyebrow */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '1.25rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <span className="eyebrow">
+            {personalInfo.availability.isConfirmed && (
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent-green)',
+                  marginBottom: '1.25rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+              >
                 <span
                   style={{
                     width: '6px',
@@ -57,30 +84,16 @@ export const Hero: React.FC = () => {
                   }}
                   aria-hidden="true"
                 />
-                {personalInfo.taglineEyebrow}
-              </span>
-
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--text-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                }}
-              >
-                <MapPin size={13} color="var(--accent-green)" />
-                {personalInfo.location}
-              </span>
-            </div>
+                <span>{personalInfo.availability.status}</span>
+              </div>
+            )}
 
             {/* Main Editorial Headline */}
             <h1
               style={{
                 fontSize: 'var(--text-hero)',
                 fontWeight: 400,
-                lineHeight: 1.08,
+                lineHeight: 1.06,
                 letterSpacing: '-0.035em',
                 color: 'var(--text-primary)',
                 marginBottom: '1.75rem',
@@ -96,11 +109,11 @@ export const Hero: React.FC = () => {
             {/* Supporting Paragraph */}
             <p
               style={{
-                fontSize: 'clamp(1.0625rem, 1.6vw, 1.25rem)',
-                lineHeight: 1.65,
+                fontSize: 'clamp(1.0625rem, 1.5vw, 1.2rem)',
+                lineHeight: 1.7,
                 color: 'var(--text-secondary)',
-                maxWidth: '44ch',
-                marginBottom: '2.25rem',
+                maxWidth: '46ch',
+                marginBottom: '2.5rem',
                 letterSpacing: '-0.01em',
               }}
             >
@@ -113,24 +126,24 @@ export const Hero: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 flexWrap: 'wrap',
-                gap: '1rem',
+                gap: '0.875rem',
               }}
             >
               <Button variant="primary" href="#projects">
                 <span>Explore my work</span>
-                <ArrowDown size={16} />
+                <ArrowDown size={15} />
               </Button>
 
               <Button variant="secondary" href="#contact">
                 <span>Get in touch</span>
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={15} />
               </Button>
 
               <Button
                 variant="secondary"
                 onClick={handleResumeClick}
                 title="Print or save Swiss-style CV as PDF"
-                ariaLabel="Download or print CV"
+                ariaLabel="CV / Resume — Download or print"
               >
                 <span>CV / Resume</span>
                 <FileDown size={15} />
@@ -151,8 +164,8 @@ export const Hero: React.FC = () => {
         {/* Subtle editorial index & coordinate line */}
         <div
           style={{
-            marginTop: 'clamp(2.5rem, 5vw, 4rem)',
-            paddingTop: '1.25rem',
+            marginTop: 'clamp(2.75rem, 5vw, 4.25rem)',
+            paddingTop: '1rem',
             borderTop: '1px solid var(--border-subtle)',
             display: 'flex',
             alignItems: 'center',
@@ -166,7 +179,7 @@ export const Hero: React.FC = () => {
               fontFamily: 'var(--font-mono)',
               fontSize: '0.75rem',
               color: 'var(--text-tertiary)',
-              letterSpacing: '0.04em',
+              letterSpacing: '0.06em',
             }}
           >
             DISCIPLINE × EMPATHY × REASONING
@@ -176,10 +189,10 @@ export const Hero: React.FC = () => {
               fontFamily: 'var(--font-mono)',
               fontSize: '0.75rem',
               color: 'var(--text-tertiary)',
-              letterSpacing: '0.04em',
+              letterSpacing: '0.06em',
             }}
           >
-            REF: {personalInfo.coordinates}
+            NATIONAL TEXTILE UNIVERSITY // BS AI (2023–2028)
           </div>
         </div>
       </Container>
