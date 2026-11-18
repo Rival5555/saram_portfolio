@@ -4,66 +4,68 @@
    ========================================================================== */
 
 :root {
-  /* Palette Tokens */
+  /* Palette Tokens — WCAG AA+ Calibrated Swiss Warm Ivory & Forest Green */
   --bg-ivory: #F5F3ED;
-  --bg-header-scrolled: rgba(245, 243, 237, 0.92);
+  --bg-header-scrolled: #F5F3ED;
   --bg-card: #FAF8F3;
-  --bg-hover: #ECEAE3;
-  --text-primary: #171916;
-  --text-secondary: #77786F;
-  --text-tertiary: #9A9B93;
-  --accent-green: #294C3B;
-  --accent-green-hover: #1E382B;
-  --accent-green-light: rgba(41, 76, 59, 0.08);
-  --accent-green-border: rgba(41, 76, 59, 0.25);
-  --border-subtle: #DCD9D0;
-  --border-strong: #B8B4A8;
+  --bg-hover: #ECE9E0;
+  --text-primary: #141613;
+  --text-secondary: #4A4C45;
+  --text-tertiary: #63655D;
+  --accent-green: #244434;
+  --accent-green-hover: #193125;
+  --accent-green-light: rgba(36, 68, 52, 0.07);
+  --accent-green-border: rgba(36, 68, 52, 0.28);
+  --btn-primary-text: #F5F3ED;
+  --border-subtle: #D8D4C8;
+  --border-strong: #9E9A8E;
   --placeholder-badge-bg: #EAE6DB;
-  --placeholder-badge-text: #5A5B53;
+  --placeholder-badge-text: #4A4C45;
 
   /* Typography Families */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Font Sizes */
+  /* Font Sizes — Disciplined Modular Typographic Scale */
   --text-xs: 0.6875rem;
   --text-sm: 0.75rem;
   --text-base: 0.9375rem;
   --text-md: 1.0625rem;
   --text-lg: 1.25rem;
-  --text-xl: clamp(1.35rem, 2.2vw, 1.75rem);
-  --text-2xl: clamp(2rem, 4vw, 3.25rem);
-  --text-hero: clamp(2.5rem, 5.5vw, 4.75rem);
+  --text-xl: clamp(1.3rem, 2vw, 1.625rem);
+  --text-2xl: clamp(2rem, 3.8vw, 3.125rem);
+  --text-hero: clamp(2.5rem, 5.2vw, 4.5rem);
 
   /* Layout, Spacing & Radius */
   --site-max-width: 1200px;
   --nav-height: 72px;
-  --section-spacing: clamp(5rem, 10vw, 9rem);
+  --section-spacing: clamp(5.5rem, 10vw, 8.5rem);
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --radius-none: 0px;
-  --radius-sm: 2px;
+  --radius-sm: 0px;
 
   /* Animation Durations & Transitions */
   --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-editorial: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-editorial: 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="dark"] {
-  --bg-ivory: #121412;
-  --bg-header-scrolled: rgba(18, 20, 18, 0.92);
-  --bg-card: #191C19;
-  --bg-hover: #222622;
-  --text-primary: #EAE6DF;
-  --text-secondary: #A0A298;
-  --text-tertiary: #6E7067;
-  --accent-green: #529471;
-  --accent-green-hover: #63AB85;
-  --accent-green-light: rgba(82, 148, 113, 0.12);
-  --accent-green-border: rgba(82, 148, 113, 0.32);
-  --border-subtle: #282C28;
-  --border-strong: #3E443E;
-  --placeholder-badge-bg: #202420;
-  --placeholder-badge-text: #9A9B93;
+  --bg-ivory: #111311;
+  --bg-header-scrolled: #111311;
+  --bg-card: #171A17;
+  --bg-hover: #1E221E;
+  --text-primary: #EDEAE2;
+  --text-secondary: #B2B4AA;
+  --text-tertiary: #8B8E84;
+  --accent-green: #68B38B;
+  --accent-green-hover: #7CC49E;
+  --accent-green-light: rgba(104, 179, 139, 0.1);
+  --accent-green-border: rgba(104, 179, 139, 0.32);
+  --btn-primary-text: #111311;
+  --border-subtle: #262A26;
+  --border-strong: #464C46;
+  --placeholder-badge-bg: #1B1F1B;
+  --placeholder-badge-text: #B2B4AA;
 }

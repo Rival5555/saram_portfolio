@@ -114,43 +114,51 @@
 .edu-course-col,
 .skill-card-col,
 .project-editorial-card,
+.project-meta-col,
+.project-title-col,
+.project-detail-col,
 .contact-main-col,
 .contact-sidebar-col {
   grid-column: span 12;
 }
 
-.about-pillar-card,
+@media (max-width: 899px) {
+  .edu-course-col,
+  .contact-sidebar-col {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 2rem;
+  }
+}
+
+.about-pillar-card {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.skill-card-col {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
 .project-editorial-card {
-  transition: border-color var(--transition-smooth), transform var(--transition-smooth);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.about-pillar-card:hover,
-.project-editorial-card:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-2px);
-}
-
-.skill-card-col,
 .channel-card {
-  transition: border-color var(--transition-smooth);
+  transition: border-color var(--transition-fast);
 }
 
-.skill-card-col:hover,
 .channel-card:hover {
-  border-color: var(--border-strong);
+  border-color: var(--text-primary);
 }
 
 .channel-card:hover .icon-arrow {
-  transform: translate(3px, -3px);
+  transform: translate(2px, -2px);
   color: var(--accent-green);
-}
-
-.experience-item-row {
-  transition: background-color var(--transition-fast);
-}
-
-.experience-item-row:hover {
-  background-color: var(--bg-hover);
 }
 
 .back-to-top-btn:hover {
@@ -161,6 +169,13 @@
 @media (min-width: 640px) and (max-width: 1023px) {
   .skill-card-col {
     grid-column: span 6;
+  }
+  .skill-card-col:nth-child(even) {
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 1.75rem;
+  }
+  .skill-card-col:nth-child(odd) {
+    padding-right: 1.75rem;
   }
 }
 
@@ -173,6 +188,15 @@
   }
   .about-pillar-card {
     grid-column: span 4;
+    padding-top: 2.25rem;
+    padding-bottom: 0.5rem;
+  }
+  .about-pillar-card:not(:first-child) {
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 2rem;
+  }
+  .about-pillar-card:not(:last-child) {
+    padding-right: 2rem;
   }
   .exp-meta-col {
     grid-column: span 3;
@@ -185,24 +209,45 @@
   }
   .edu-main-col {
     grid-column: span 7;
+    padding-right: 2.5rem;
   }
   .edu-course-col {
     grid-column: span 5;
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 2.5rem;
   }
-  .project-editorial-card {
+  .project-meta-col {
+    grid-column: span 3;
+  }
+  .project-title-col {
     grid-column: span 4;
+  }
+  .project-detail-col {
+    grid-column: span 5;
   }
   .contact-main-col {
     grid-column: span 7;
+    padding-right: 2rem;
   }
   .contact-sidebar-col {
     grid-column: span 5;
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 2.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .skill-card-col {
     grid-column: span 3;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+  }
+  .skill-card-col:not(:first-child) {
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 1.75rem;
+  }
+  .skill-card-col:not(:last-child) {
+    padding-right: 1.75rem;
   }
 }
 
@@ -213,6 +258,25 @@
   @page {
     margin: 1.5cm 1.5cm 1.5cm 1.5cm;
     size: A4 portrait;
+  }
+
+  :root,
+  [data-theme="dark"] {
+    --bg-ivory: #FFFFFF;
+    --bg-header-scrolled: #FFFFFF;
+    --bg-card: #FAF8F3;
+    --bg-hover: #F5F3ED;
+    --text-primary: #171916;
+    --text-secondary: #4A4B44;
+    --text-tertiary: #6E7067;
+    --accent-green: #294C3B;
+    --accent-green-hover: #1E382B;
+    --accent-green-light: rgba(41, 76, 59, 0.08);
+    --accent-green-border: rgba(41, 76, 59, 0.25);
+    --border-subtle: #DCD9D0;
+    --border-strong: #B8B4A8;
+    --placeholder-badge-bg: #EAE6DB;
+    --placeholder-badge-text: #5A5B53;
   }
 
   body {

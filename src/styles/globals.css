@@ -35,21 +35,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle background grain texture for organic editorial warmth */
+/* Pure warm ivory paper surface — no synthetic dot-grid overlay */
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(23, 25, 22, 0.02) 1px, transparent 1px);
-  background-size: 24px 24px;
-  z-index: 1000;
+  display: none;
 }
 
 /* Accessible selection */
 ::selection {
   background-color: var(--accent-green);
-  color: #F5F3ED;
+  color: var(--btn-primary-text);
 }
 
 /* Focus styles */
@@ -106,7 +100,7 @@ a {
   color: var(--text-primary);
   border-bottom: 1px solid var(--text-primary);
   padding-bottom: 2px;
-  transition: all var(--transition-smooth);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .editorial-link:hover {
@@ -119,7 +113,7 @@ a {
 }
 
 .editorial-link:hover .icon-arrow {
-  transform: translate(3px, -3px);
+  transform: translate(2px, -2px);
 }
 
 .btn-primary {
@@ -127,21 +121,20 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  padding: 0.875rem 1.75rem;
+  padding: 0.8125rem 1.625rem;
   background-color: var(--accent-green);
-  color: #F5F3ED;
-  font-size: var(--text-base);
+  color: var(--btn-primary-text);
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   border: 1px solid var(--accent-green);
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .btn-primary:hover {
   background-color: var(--accent-green-hover);
   border-color: var(--accent-green-hover);
-  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -149,15 +142,15 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  padding: 0.875rem 1.75rem;
+  padding: 0.8125rem 1.625rem;
   background-color: transparent;
   color: var(--text-primary);
-  font-size: var(--text-base);
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  border: 1px solid var(--border-subtle);
+  letter-spacing: 0.01em;
+  border: 1px solid var(--border-strong);
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .btn-secondary:hover {

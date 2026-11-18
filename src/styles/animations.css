@@ -28,32 +28,15 @@
   }
 }
 
-/* Hero section load entrance animations */
-.hero-text-col > div:first-child {
-  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.hero-text-col > h1 {
-  animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
-}
-.hero-text-col > p {
-  animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
-}
-.hero-text-col > div:last-of-type {
-  animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
-}
-.hero-graphic-col {
-  animation: fadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
-}
+/* Above-the-fold Hero renders immediately at opacity: 1 to eliminate LCP render delay */
 
-/* Scroll-triggered entrance reveals */
+/* Scroll-triggered entrance reveals for below-the-fold sections */
 html.reveal-ready .reveal-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color var(--transition-smooth),
-              background-color var(--transition-fast);
-  will-change: opacity, transform;
+  transform: translateY(14px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color var(--transition-smooth);
 }
 
 html.reveal-ready .reveal-item.is-revealed {
@@ -61,36 +44,27 @@ html.reveal-ready .reveal-item.is-revealed {
   transform: translateY(0);
 }
 
-/* Staggered entrance timing for multi-card sections */
+/* Staggered entrance timing for multi-column Swiss grid sections */
 html.reveal-ready .about-pillar-card:nth-child(1),
 html.reveal-ready .project-editorial-card:nth-child(1),
 html.reveal-ready .skill-card-col:nth-child(1) {
-  transition-delay: 40ms;
+  transition-delay: 30ms;
 }
 
 html.reveal-ready .about-pillar-card:nth-child(2),
 html.reveal-ready .project-editorial-card:nth-child(2),
 html.reveal-ready .skill-card-col:nth-child(2) {
-  transition-delay: 120ms;
+  transition-delay: 90ms;
 }
 
 html.reveal-ready .about-pillar-card:nth-child(3),
 html.reveal-ready .project-editorial-card:nth-child(3),
 html.reveal-ready .skill-card-col:nth-child(3) {
-  transition-delay: 200ms;
+  transition-delay: 150ms;
 }
 
 html.reveal-ready .skill-card-col:nth-child(4) {
-  transition-delay: 280ms;
-}
-
-/* Ensure hover interactions on revealed cards remain immediate and crisp */
-html.reveal-ready .about-pillar-card.is-revealed:hover,
-html.reveal-ready .project-editorial-card.is-revealed:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-strong);
-  transition-delay: 0s;
-  transition-duration: var(--transition-smooth);
+  transition-delay: 210ms;
 }
 
 /* Respect user's motion preference */
