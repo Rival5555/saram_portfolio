@@ -1,5 +1,4 @@
 import React from 'react';
-import { Clock, MapPin, Edit3 } from 'lucide-react';
 import { experienceData } from '../../data/experience';
 import { Container } from '../common/Container';
 import { SectionHeading } from '../common/SectionHeading';
@@ -9,20 +8,21 @@ export const Experience: React.FC = () => {
     <section id="experience" className="section" aria-label="Professional Experience">
       <Container>
         <SectionHeading
+          index="02"
           tag="CHRONOLOGY"
           titlePrefix="Professional"
           titleHighlight="experience."
           metaRight={`EDITORIAL TIMELINE // 0${experienceData.length} ENTRIES`}
         />
 
-        {/* Editorial Vertical List with Thin Dividers */}
+        {/* Editorial Vertical Ledger with Thin Dividers */}
         <div style={{ borderTop: '1px solid var(--border-subtle)' }}>
           {experienceData.map((item) => (
             <article
               key={item.id}
               style={{
-                paddingTop: 'clamp(2rem, 4vw, 3rem)',
-                paddingBottom: 'clamp(2rem, 4vw, 3rem)',
+                paddingTop: 'clamp(2.25rem, 4vw, 3.25rem)',
+                paddingBottom: 'clamp(2.25rem, 4vw, 3.25rem)',
                 borderBottom: '1px solid var(--border-subtle)',
               }}
               className="experience-item-row"
@@ -35,20 +35,20 @@ export const Experience: React.FC = () => {
                   alignItems: 'flex-start',
                 }}
               >
-                {/* Column 1: Sequence & Time Period */}
+                {/* Column 1: Sequence, Period & Location */}
                 <div className="exp-meta-col">
                   <div
                     style={{
                       display: 'flex',
-                      alignItems: 'center',
+                      alignItems: 'baseline',
                       gap: '0.75rem',
-                      marginBottom: '0.5rem',
+                      marginBottom: '0.35rem',
                     }}
                   >
                     <span
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '0.875rem',
+                        fontSize: '0.8125rem',
                         fontWeight: 600,
                         color: 'var(--accent-green)',
                       }}
@@ -66,36 +66,16 @@ export const Experience: React.FC = () => {
                     </span>
                   </div>
 
-                  {item.duration && (
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.75rem',
-                        color: 'var(--accent-green)',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.35rem',
-                        marginTop: '0.25rem',
-                      }}
-                    >
-                      <Clock size={13} />
-                      <span>{item.duration}</span>
-                    </div>
-                  )}
-
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.75rem',
                       color: 'var(--text-tertiary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.35rem',
-                      marginTop: '0.5rem',
+                      letterSpacing: '0.03em',
                     }}
                   >
-                    <MapPin size={13} />
-                    <span>{item.location}</span>
+                    {item.location}
+                    {item.duration ? ` · ${item.duration}` : ''}
                   </div>
                 </div>
 
@@ -115,7 +95,7 @@ export const Experience: React.FC = () => {
 
                   <div
                     style={{
-                      fontSize: '1.0625rem',
+                      fontSize: '1rem',
                       fontWeight: 500,
                       color: 'var(--accent-green)',
                       letterSpacing: '-0.01em',
@@ -127,30 +107,10 @@ export const Experience: React.FC = () => {
 
                 {/* Column 3: Verified Description & Tags */}
                 <div className="exp-desc-col">
-                  {item.isPlaceholderDescription && (
-                    <div
-                      style={{
-                        marginBottom: '0.875rem',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.6875rem',
-                        color: 'var(--placeholder-badge-text)',
-                        backgroundColor: 'var(--placeholder-badge-bg)',
-                        padding: '0.25rem 0.5rem',
-                        border: '1px dashed var(--border-strong)',
-                      }}
-                    >
-                      <Edit3 size={11} />
-                      <span>Pending verified responsibilities from owner</span>
-                    </div>
-                  )}
-
                   <p
                     style={{
                       fontSize: '0.9375rem',
-                      lineHeight: 1.7,
+                      lineHeight: 1.72,
                       color: 'var(--text-secondary)',
                       marginBottom: '1.25rem',
                     }}
@@ -158,18 +118,37 @@ export const Experience: React.FC = () => {
                     {item.description}
                   </p>
 
+                  {item.isPlaceholderDescription && (
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.6875rem',
+                        color: 'var(--text-tertiary)',
+                        letterSpacing: '0.04em',
+                        marginBottom: '1rem',
+                      }}
+                    >
+                      [Note: Specific dates and operational metrics pending owner verification]
+                    </div>
+                  )}
+
                   {/* Competency tags */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.5rem 1.25rem',
+                      paddingTop: '0.875rem',
+                      borderTop: '1px solid var(--border-subtle)',
+                    }}
+                  >
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
                         style={{
                           fontFamily: 'var(--font-mono)',
-                          fontSize: '0.6875rem',
+                          fontSize: '0.75rem',
                           color: 'var(--text-primary)',
-                          backgroundColor: 'var(--bg-hover)',
-                          padding: '0.2rem 0.55rem',
-                          border: '1px solid var(--border-subtle)',
                           letterSpacing: '0.02em',
                         }}
                       >

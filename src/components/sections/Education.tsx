@@ -1,5 +1,4 @@
 import React from 'react';
-import { GraduationCap, BookOpen, AlertCircle } from 'lucide-react';
 import { educationData } from '../../data/education';
 import { Container } from '../common/Container';
 import { SectionHeading } from '../common/SectionHeading';
@@ -9,29 +8,27 @@ export const Education: React.FC = () => {
     <section id="education" className="section" aria-label="Education & Academic Path">
       <Container>
         <SectionHeading
+          index="03"
           tag="ACADEMIC FOUNDATION"
           titlePrefix="Education &"
           titleHighlight="curriculum."
+          metaRight={`${educationData.institution.toUpperCase()} // ${educationData.statusPeriod}`}
         />
 
-        {/* Editorial Layout */}
+        {/* Architectural 12-Column Editorial Split */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: 'clamp(1.5rem, 3.5vw, 3rem)',
+            borderTop: '1px solid var(--border-subtle)',
+            borderBottom: '1px solid var(--border-subtle)',
+            paddingTop: 'clamp(2rem, 4vw, 3rem)',
+            paddingBottom: 'clamp(2rem, 4vw, 3rem)',
             alignItems: 'flex-start',
           }}
         >
           {/* Main Degree Profile */}
-          <div
-            style={{
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-subtle)',
-              padding: 'clamp(1.75rem, 4vw, 3rem)',
-            }}
-            className="edu-main-col"
-          >
+          <div className="edu-main-col">
             <div
               style={{
                 display: 'flex',
@@ -39,29 +36,23 @@ export const Education: React.FC = () => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
                 gap: '0.75rem',
-                marginBottom: '1.5rem',
-                paddingBottom: '1.25rem',
-                borderBottom: '1px solid var(--border-subtle)',
+                marginBottom: '1.25rem',
               }}
             >
-              <div
+              <span
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.75rem',
                   color: 'var(--accent-green)',
-                  backgroundColor: 'var(--accent-green-light)',
-                  border: '1px solid var(--accent-green-border)',
-                  padding: '0.3rem 0.65rem',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  fontWeight: 600,
                 }}
               >
-                <GraduationCap size={15} />
-                <span>{educationData.degreeStatus}</span>
-              </div>
+                STATUS // {educationData.degreeStatus}
+              </span>
 
-              <div
+              <span
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.8125rem',
@@ -69,13 +60,13 @@ export const Education: React.FC = () => {
                 }}
               >
                 {educationData.statusPeriod}
-              </div>
+              </span>
             </div>
 
             <h3
               style={{
-                fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-                fontWeight: 500,
+                fontSize: 'clamp(1.75rem, 3vw, 2.375rem)',
+                fontWeight: 400,
                 letterSpacing: '-0.025em',
                 color: 'var(--text-primary)',
                 marginBottom: '0.5rem',
@@ -86,95 +77,63 @@ export const Education: React.FC = () => {
 
             <div
               style={{
-                fontSize: '1.1875rem',
+                fontSize: '1.125rem',
                 color: 'var(--accent-green)',
                 fontWeight: 500,
-                marginBottom: '1.5rem',
+                marginBottom: '1.75rem',
               }}
             >
               {educationData.institution}
               <span
                 style={{
                   color: 'var(--text-tertiary)',
-                  fontSize: '0.9375rem',
+                  fontSize: '0.875rem',
                   marginLeft: '0.75rem',
                   fontFamily: 'var(--font-mono)',
+                  fontWeight: 400,
                 }}
               >
-                // {educationData.location}
+                — {educationData.location}
               </span>
             </div>
 
-            {/* Note on In-Progress Degree */}
-            <div
+            <p
               style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.625rem',
-                backgroundColor: 'var(--bg-hover)',
-                padding: '0.875rem 1rem',
-                border: '1px solid var(--border-subtle)',
-                marginTop: '1.5rem',
+                fontSize: '0.9375rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.7,
+                maxWidth: '52ch',
+                borderLeft: '2px solid var(--border-strong)',
+                paddingLeft: '1.25rem',
               }}
             >
-              <AlertCircle
-                size={16}
-                color="var(--accent-green)"
-                style={{ flexShrink: 0, marginTop: '2px' }}
-              />
-              <p
-                style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.55,
-                }}
-              >
-                Active undergraduate student pursuing rigorous core concepts in computational
-                intelligence. Coursework and laboratory modules will be updated as semester
-                milestones are certified.
-              </p>
-            </div>
+              Active undergraduate student pursuing rigorous core concepts in computational
+              intelligence. Coursework and laboratory modules are updated as semester milestones are
+              certified.
+            </p>
           </div>
 
           {/* Core Areas & Coursework Pillar */}
-          <div
-            style={{
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-subtle)',
-              padding: 'clamp(1.75rem, 4vw, 3rem)',
-            }}
-            className="edu-course-col"
-          >
-            <div
+          <div className="edu-course-col">
+            <h4
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--text-tertiary)',
                 marginBottom: '1.25rem',
-                paddingBottom: '0.75rem',
-                borderBottom: '1px solid var(--border-subtle)',
+                fontWeight: 500,
               }}
             >
-              <BookOpen size={16} color="var(--accent-green)" />
-              <h4
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.8125rem',
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                Core Academic Foundations
-              </h4>
-            </div>
+              CORE ACADEMIC FOUNDATIONS
+            </h4>
 
             <ul
               style={{
                 listStyle: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.875rem',
               }}
             >
               {educationData.academicPillars.map((pillar, idx) => (
@@ -183,11 +142,12 @@ export const Education: React.FC = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'baseline',
-                    gap: '0.75rem',
+                    gap: '0.875rem',
                     fontSize: '0.9375rem',
-                    color: 'var(--text-secondary)',
+                    color: 'var(--text-primary)',
+                    paddingTop: idx === 0 ? '0' : '0.75rem',
                     paddingBottom: '0.75rem',
-                    borderBottom: '1px dashed var(--border-subtle)',
+                    borderBottom: '1px solid var(--border-subtle)',
                   }}
                 >
                   <span
@@ -207,14 +167,14 @@ export const Education: React.FC = () => {
 
             <div
               style={{
-                marginTop: '1.5rem',
+                marginTop: '1.25rem',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
                 color: 'var(--text-tertiary)',
-                fontStyle: 'italic',
+                lineHeight: 1.5,
               }}
             >
-              * {educationData.note}
+              {educationData.note}
             </div>
           </div>
         </div>

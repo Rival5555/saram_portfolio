@@ -1,23 +1,18 @@
 import React from 'react';
-import { ShieldCheck, MessageSquareCode, BrainCircuit } from 'lucide-react';
 import { personalInfo } from '../../data/personalInfo';
 import { Container } from '../common/Container';
 import { SectionHeading } from '../common/SectionHeading';
 
 export const About: React.FC = () => {
-  const pillarIcons = [
-    <ShieldCheck key="shield" size={22} color="var(--accent-green)" />,
-    <MessageSquareCode key="message" size={22} color="var(--accent-green)" />,
-    <BrainCircuit key="brain" size={22} color="var(--accent-green)" />,
-  ];
-
   return (
     <section id="about" className="section" aria-label="About perspective">
       <Container>
         <SectionHeading
+          index="01"
           tag="PERSPECTIVE & BACKGROUND"
           titlePrefix="A different"
           titleHighlight="perspective."
+          metaRight="THREE INTERSECTING DOMAINS"
         />
 
         {/* Lead Narrative Grid */}
@@ -26,13 +21,13 @@ export const About: React.FC = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
             gap: 'clamp(1.5rem, 3.5vw, 3rem)',
-            marginBottom: 'clamp(3rem, 6vw, 4.5rem)',
+            marginBottom: 'clamp(3.5rem, 6vw, 5rem)',
           }}
         >
           <div className="about-lead-col">
             <p
               style={{
-                fontSize: 'clamp(1.25rem, 2.2vw, 1.625rem)',
+                fontSize: 'clamp(1.25rem, 2.1vw, 1.5625rem)',
                 lineHeight: 1.45,
                 color: 'var(--text-primary)',
                 letterSpacing: '-0.02em',
@@ -63,98 +58,70 @@ export const About: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Pillars: The Intersecting Dimensions */}
+        {/* 3 Pillars: Architectural 3-Column Swiss Grid (No Boxed Cards or Generic Icons) */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.5rem',
+            borderBottom: '1px solid var(--border-subtle)',
+            paddingBottom: '2rem',
           }}
         >
-          {personalInfo.bio.pillars.map((pillar, idx) => (
-            <div
-              key={pillar.number}
-              style={{
-                backgroundColor: 'var(--bg-card)',
-                border: '1px solid var(--border-subtle)',
-                padding: 'clamp(1.5rem, 3vw, 2.25rem)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-              className="about-pillar-card"
-            >
-              <div>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '1.5rem',
-                    paddingBottom: '1rem',
-                    borderBottom: '1px solid var(--border-subtle)',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.875rem',
-                      fontWeight: 600,
-                      color: 'var(--accent-green)',
-                    }}
-                  >
-                    // {pillar.number}
-                  </span>
-                  <div>{pillarIcons[idx]}</div>
-                </div>
-
-                <div
+          {personalInfo.bio.pillars.map((pillar) => (
+            <div key={pillar.number} className="about-pillar-card">
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
+                  marginBottom: '1.25rem',
+                }}
+              >
+                <span
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    color: 'var(--accent-green)',
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  PILLAR // {pillar.number}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.6875rem',
                     textTransform: 'uppercase',
                     color: 'var(--text-tertiary)',
-                    letterSpacing: '0.08em',
-                    marginBottom: '0.35rem',
+                    letterSpacing: '0.06em',
                   }}
                 >
                   {pillar.source}
-                </div>
-
-                <h3
-                  style={{
-                    fontSize: '1.25rem',
-                    fontWeight: 500,
-                    letterSpacing: '-0.02em',
-                    marginBottom: '1rem',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  {pillar.title}
-                </h3>
-
-                <p
-                  style={{
-                    fontSize: '0.9375rem',
-                    lineHeight: 1.65,
-                    color: 'var(--text-secondary)',
-                  }}
-                >
-                  {pillar.highlight}
-                </p>
+                </span>
               </div>
 
-              <div
+              <h3
                 style={{
-                  marginTop: '1.75rem',
-                  paddingTop: '0.75rem',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--accent-green)',
+                  fontSize: '1.25rem',
+                  fontWeight: 500,
+                  letterSpacing: '-0.02em',
+                  marginBottom: '0.875rem',
+                  color: 'var(--text-primary)',
                 }}
               >
-                CORE ATTRIBUTE
-              </div>
+                {pillar.title}
+              </h3>
+
+              <p
+                style={{
+                  fontSize: '0.9375rem',
+                  lineHeight: 1.68,
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                {pillar.highlight}
+              </p>
             </div>
           ))}
         </div>
