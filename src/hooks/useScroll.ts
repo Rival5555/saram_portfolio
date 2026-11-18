@@ -11,15 +11,32 @@ export function useScroll(navigation: NavigationItem[], threshold = 20): UseScro
   const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
+    let rafId: number | null = null;
+
+    const updateScrollState = () => {
+      const y = window.scrollY;
+      const nextScrolled = y > threshold;
+      setIsScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
+      if (y < 180) {
+        setActiveSection((prev) => (prev === '' ? prev : ''));
+      }
+      rafId = null;
+    };
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > threshold);
-      if (window.scrollY < 180) {
-        setActiveSection('');
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateScrollState);
       }
     };
-    handleScroll();
+
+    updateScrollState();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, [threshold]);
 
   useEffect(() => {
