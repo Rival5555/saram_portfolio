@@ -1,0 +1,16 @@
+{
+  "name": "Saram Zafar — Personal Portfolio",
+  "short_name": "Saram Zafar",
+  "description": "Business Development Executive and BS Artificial Intelligence student at National Textile University, Faisalabad.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F3ED",
+  "theme_color": "#244434",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
