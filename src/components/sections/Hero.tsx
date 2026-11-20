@@ -20,38 +20,10 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section
-      id="hero"
-      aria-label="Introduction"
-      style={{
-        paddingTop: 'calc(var(--nav-height) + clamp(2.5rem, 5vw, 4.5rem))',
-        paddingBottom: 'clamp(3.5rem, 6vw, 5.5rem)',
-        position: 'relative',
-        minHeight: '86vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
+    <section id="hero" className="hero-section" aria-label="Introduction">
       <Container>
         {/* Top Architectural Specification Strip */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '0.75rem',
-            paddingBottom: '1rem',
-            marginBottom: 'clamp(2rem, 4vw, 3.25rem)',
-            borderBottom: '1px solid var(--border-subtle)',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.75rem',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            color: 'var(--text-tertiary)',
-          }}
-        >
+        <div className="hero-spec-strip">
           <span>{personalInfo.taglineEyebrow}</span>
           <span>
             {personalInfo.location} // {personalInfo.coordinates}
@@ -62,73 +34,25 @@ export const Hero: React.FC = () => {
           {/* Main Content Column */}
           <div className="hero-text-col">
             {personalInfo.availability.isConfirmed && (
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent-green)',
-                  marginBottom: '1.25rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                }}
-              >
-                <span
-                  style={{
-                    width: '6px',
-                    height: '6px',
-                    backgroundColor: 'var(--accent-green)',
-                    display: 'inline-block',
-                  }}
-                  aria-hidden="true"
-                />
+              <div className="hero-availability">
+                <span className="hero-availability-dot" aria-hidden="true" />
                 <span>{personalInfo.availability.status}</span>
               </div>
             )}
 
             {/* Main Editorial Headline */}
-            <h1
-              style={{
-                fontSize: 'var(--text-hero)',
-                fontWeight: 400,
-                lineHeight: 1.06,
-                letterSpacing: '-0.035em',
-                color: 'var(--text-primary)',
-                marginBottom: '1.75rem',
-              }}
-            >
-              Grounded in service.{' '}
-              <br className="hero-break" />
-              <span className="font-editorial" style={{ color: 'var(--accent-green)', fontWeight: 400 }}>
+            <h1 className="hero-headline">
+              Grounded in service. <br className="hero-break" />
+              <span className="font-editorial hero-headline-accent">
                 Curious about intelligence.
               </span>
             </h1>
 
             {/* Supporting Paragraph */}
-            <p
-              style={{
-                fontSize: 'clamp(1.0625rem, 1.5vw, 1.2rem)',
-                lineHeight: 1.7,
-                color: 'var(--text-secondary)',
-                maxWidth: '46ch',
-                marginBottom: '2.5rem',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              {personalInfo.bio.heroParagraph}
-            </p>
+            <p className="hero-lead">{personalInfo.bio.heroParagraph}</p>
 
             {/* Calls to Action */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '0.875rem',
-              }}
-            >
+            <div className="hero-actions">
               <Button variant="primary" href="#projects">
                 <span>Explore my work</span>
                 <ArrowDown size={15} />
@@ -149,7 +73,7 @@ export const Hero: React.FC = () => {
                 <FileDown size={15} />
               </Button>
 
-              <Button variant="editorial" href="#about" style={{ marginLeft: '0.5rem' }}>
+              <Button variant="editorial" href="#about" className="hero-editorial-cta">
                 <span>Read perspective</span>
               </Button>
             </div>
@@ -162,38 +86,9 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Subtle editorial index & coordinate line */}
-        <div
-          style={{
-            marginTop: 'clamp(2.75rem, 5vw, 4.25rem)',
-            paddingTop: '1rem',
-            borderTop: '1px solid var(--border-subtle)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              color: 'var(--text-tertiary)',
-              letterSpacing: '0.06em',
-            }}
-          >
-            DISCIPLINE × EMPATHY × REASONING
-          </div>
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              color: 'var(--text-tertiary)',
-              letterSpacing: '0.06em',
-            }}
-          >
-            NATIONAL TEXTILE UNIVERSITY // BS AI (2023–2028)
-          </div>
+        <div className="hero-footer-strip">
+          <div>DISCIPLINE × EMPATHY × REASONING</div>
+          <div>NATIONAL TEXTILE UNIVERSITY // BS AI (2023–2028)</div>
         </div>
       </Container>
     </section>

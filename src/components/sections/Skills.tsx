@@ -15,99 +15,24 @@ export const Skills: React.FC = () => {
         />
 
         {/* 4-Column Exposed Hairline Swiss Typographic Directory */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            borderBottom: '1px solid var(--border-subtle)',
-            paddingBottom: '2rem',
-          }}
-        >
+        <div className="swiss-grid-12 skills-directory-wrapper">
           {skillsData.map((cat) => (
             <div key={cat.code} className="skill-card-col">
-              <div
-                style={{
-                  marginBottom: '0.75rem',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
-                    fontWeight: 600,
-                    color: 'var(--accent-green)',
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  [{cat.code}]
-                </span>
-              </div>
-
-              <h3
-                style={{
-                  fontSize: '1.1875rem',
-                  fontWeight: 500,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text-primary)',
-                  marginBottom: '0.5rem',
-                }}
-              >
-                {cat.title}
-              </h3>
-
-              <p
-                style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.6,
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {cat.description}
-              </p>
+              <span className="skill-cat-code">[{cat.code}]</span>
+              <h3 className="skill-cat-title">{cat.title}</h3>
+              <p className="skill-cat-desc">{cat.description}</p>
 
               {/* Typographic Skill Ledger */}
-              <ul
-                style={{
-                  listStyle: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderTop: '1px solid var(--border-subtle)',
-                }}
-              >
+              <ul className="skill-ledger">
                 {cat.skills.map((skill, sIdx) => (
                   <li
                     key={sIdx}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      justifyContent: 'space-between',
-                      gap: '0.5rem',
-                      padding: '0.65rem 0',
-                      borderBottom: '1px solid var(--border-subtle)',
-                      fontSize: '0.875rem',
-                      color: skill.isPlaceholder
-                        ? 'var(--text-tertiary)'
-                        : 'var(--text-primary)',
-                    }}
+                    className={`skill-ledger-item ${
+                      skill.isPlaceholder ? 'skill-ledger-item--pending' : ''
+                    }`}
                   >
-                    <span style={{ fontWeight: skill.isPlaceholder ? 400 : 500 }}>
-                      {skill.name}
-                    </span>
-                    {skill.isPlaceholder && (
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.625rem',
-                          letterSpacing: '0.05em',
-                          textTransform: 'uppercase',
-                          color: 'var(--text-tertiary)',
-                          flexShrink: 0,
-                        }}
-                      >
-                        Pending
-                      </span>
-                    )}
+                    <span>{skill.name}</span>
+                    {skill.isPlaceholder && <span className="skill-pending-tag">Pending</span>}
                   </li>
                 ))}
               </ul>

@@ -22,98 +22,31 @@ export const Projects: React.FC = () => {
 
         {/* Restrained Editorial Notice Line (only shown while placeholder entries exist) */}
         {hasPlaceholders && (
-          <div
-            style={{
-              paddingBottom: '1.75rem',
-              display: 'flex',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '1rem',
-            }}
-          >
-            <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', maxWidth: '68ch' }}>
-              <strong style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
-                Index Note:
-              </strong>{' '}
-              The entries below represent structured blueprints for upcoming academic and research
-              work, configurable in{' '}
-              <code
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.8125rem',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                src/data/projects.ts
-              </code>
-              .
+          <div className="projects-notice">
+            <p className="projects-notice-text">
+              <strong className="projects-notice-strong">Index Note:</strong> The entries below
+              represent structured blueprints for upcoming academic and research work, configurable
+              in <code className="projects-notice-code">src/data/projects.ts</code>.
             </p>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem',
-                color: 'var(--accent-green)',
-                letterSpacing: '0.06em',
-              }}
-            >
-              ZERO FICTIONAL CLAIMS
-            </span>
+            <span className="projects-notice-badge">ZERO FICTIONAL CLAIMS</span>
           </div>
         )}
 
         {/* Swiss Editorial Case-Study Ledger */}
-        <div style={{ borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="ledger-top-rule">
           {projectsData.map((proj) => (
             <article key={proj.id} className="project-editorial-card">
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(12, 1fr)',
-                  gap: 'clamp(1.25rem, 2.5vw, 2.25rem)',
-                  alignItems: 'flex-start',
-                }}
-              >
+              <div className="swiss-grid-12 swiss-grid-gap-md">
                 {/* Column 1: Status & Repository Link */}
                 <div className="project-meta-col">
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      color: 'var(--accent-green)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
-                      marginBottom: '0.5rem',
-                    }}
-                  >
-                    {proj.status}
-                  </div>
+                  <div className="project-status">{proj.status}</div>
 
                   {proj.isPlaceholder && (
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.6875rem',
-                        color: 'var(--text-tertiary)',
-                        letterSpacing: '0.04em',
-                        marginBottom: '1.25rem',
-                      }}
-                    >
-                      Blueprint Entry
-                    </div>
+                    <div className="project-blueprint-tag">Blueprint Entry</div>
                   )}
 
                   {/* Repository / Demo Link */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      gap: '0.625rem',
-                      marginTop: '0.75rem',
-                    }}
-                  >
+                  <div className="project-links">
                     {proj.githubUrl &&
                       (() => {
                         const unfilledRepo = isUnfilled(proj.githubUrl);
@@ -125,8 +58,7 @@ export const Projects: React.FC = () => {
                             href={sanitizeUrl(resolvedUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="editorial-link"
-                            style={{ fontSize: '0.8125rem' }}
+                            className="editorial-link project-link-sm"
                           >
                             <GithubIcon size={14} />
                             <span>
@@ -142,8 +74,7 @@ export const Projects: React.FC = () => {
                         href={sanitizeUrl(proj.demoUrl)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="editorial-link"
-                        style={{ fontSize: '0.8125rem' }}
+                        className="editorial-link project-link-sm"
                       >
                         <span>Live Verification</span>
                         <ArrowUpRight size={13} className="icon-arrow" />
@@ -154,30 +85,11 @@ export const Projects: React.FC = () => {
 
                 {/* Column 2: Project Title & Stack */}
                 <div className="project-title-col">
-                  <h3
-                    style={{
-                      fontSize: 'var(--text-xl)',
-                      fontWeight: 500,
-                      letterSpacing: '-0.02em',
-                      color: 'var(--text-primary)',
-                      lineHeight: 1.25,
-                      marginBottom: '1rem',
-                    }}
-                  >
-                    {proj.title}
-                  </h3>
+                  <h3 className="project-title">{proj.title}</h3>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem 1rem' }}>
+                  <div className="project-tech-list">
                     {proj.technologies.map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.75rem',
-                          color: 'var(--accent-green)',
-                          letterSpacing: '0.02em',
-                        }}
-                      >
+                      <span key={tIdx} className="project-tech-tag">
                         {tech}
                       </span>
                     ))}
@@ -186,58 +98,15 @@ export const Projects: React.FC = () => {
 
                 {/* Column 3: Structured Problem & Architecture */}
                 <div className="project-detail-col">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div className="project-detail-stack">
                     <div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.6875rem',
-                          textTransform: 'uppercase',
-                          color: 'var(--text-tertiary)',
-                          letterSpacing: '0.06em',
-                          marginBottom: '0.3rem',
-                        }}
-                      >
-                        Problem Statement
-                      </div>
-                      <p
-                        style={{
-                          fontSize: '0.9375rem',
-                          lineHeight: 1.68,
-                          color: 'var(--text-secondary)',
-                        }}
-                      >
-                        {proj.problem}
-                      </p>
+                      <div className="project-detail-label">Problem Statement</div>
+                      <p className="project-detail-body">{proj.problem}</p>
                     </div>
 
-                    <div
-                      style={{
-                        paddingTop: '1rem',
-                        borderTop: '1px solid var(--border-subtle)',
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.6875rem',
-                          textTransform: 'uppercase',
-                          color: 'var(--text-tertiary)',
-                          letterSpacing: '0.06em',
-                          marginBottom: '0.3rem',
-                        }}
-                      >
-                        Proposed Architecture / Approach
-                      </div>
-                      <p
-                        style={{
-                          fontSize: '0.9375rem',
-                          lineHeight: 1.68,
-                          color: 'var(--text-secondary)',
-                        }}
-                      >
-                        {proj.approach}
-                      </p>
+                    <div className="project-approach-block">
+                      <div className="project-detail-label">Proposed Architecture / Approach</div>
+                      <p className="project-detail-body">{proj.approach}</p>
                     </div>
                   </div>
                 </div>
