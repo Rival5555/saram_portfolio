@@ -17,7 +17,7 @@ export function useScroll(navigation: NavigationItem[], threshold = 20): UseScro
       const y = window.scrollY;
       const nextScrolled = y > threshold;
       setIsScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
-      if (y < 180) {
+      if (y < 180 && document.getElementById('hero')) {
         setActiveSection((prev) => (prev === '' ? prev : ''));
       }
       rafId = null;
@@ -46,6 +46,10 @@ export function useScroll(navigation: NavigationItem[], threshold = 20): UseScro
       .filter((el): el is HTMLElement => el !== null);
 
     if (elements.length === 0) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

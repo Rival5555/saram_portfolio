@@ -76,6 +76,22 @@ export const safeSetStorage = (key: string, value: string): void => {
 };
 
 /**
+ * Resolves the preferred color theme from persisted storage or OS preference.
+ */
+export const getInitialTheme = (storageKey: string): 'light' | 'dark' => {
+  const saved = safeGetStorage(storageKey);
+  if (saved === 'dark' || saved === 'light') return saved;
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  ) {
+    return 'dark';
+  }
+  return 'light';
+};
+
+/**
  * Smoothly scrolls the window to the top of the document.
  */
 export const scrollToTop = (): void => {

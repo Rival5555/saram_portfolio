@@ -4,7 +4,7 @@ import { sanitizeUrl } from '../../utils/helpers';
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'editorial';
   href?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
   target?: string;
   rel?: string;
   title?: string;

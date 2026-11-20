@@ -11,6 +11,8 @@ interface RevealProps {
  */
 export const Reveal: React.FC<RevealProps> = ({ children, className = '' }) => {
   useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return;
+
     const targets = document.querySelectorAll<HTMLElement>(REVEAL_SELECTORS);
     if (targets.length === 0) return;
 
