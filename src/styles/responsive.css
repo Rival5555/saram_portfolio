@@ -295,7 +295,7 @@
     transform: none !important;
   }
 
-  /* Hide interactive chrome */
+  /* Hide interactive navigation and button chrome */
   header,
   .skip-to-content,
   .guide-trigger-btn,
@@ -303,9 +303,7 @@
   .theme-toggle-btn,
   .btn-primary,
   .btn-secondary,
-  .editorial-link,
   #hero .editorial-link,
-  .status-pill,
   .custom-cursor-dot {
     display: none !important;
   }
@@ -313,12 +311,12 @@
   #hero {
     padding-top: 0 !important;
     min-height: auto !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 1.5rem !important;
   }
 
   .section {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
     break-inside: avoid;
   }
 
@@ -329,7 +327,7 @@
     break-inside: avoid;
     box-shadow: none !important;
     border-color: #DCD9D0 !important;
-    background-color: #FAF8F3 !important;
+    background-color: transparent !important;
   }
 
   .section-title {
@@ -349,5 +347,13 @@
   a {
     color: #171916 !important;
     text-decoration: none !important;
+    border-bottom: none !important;
+  }
+
+  a[href^="https://"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: #4A4B44;
   }
 }

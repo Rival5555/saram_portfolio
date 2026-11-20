@@ -6,6 +6,7 @@
 @import './variables.css';
 @import './typography.css';
 @import './animations.css';
+@import './components.css';
 @import './responsive.css';
 
 /* Reset & Base Setup */
@@ -33,11 +34,6 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-}
-
-/* Pure warm ivory paper surface — no synthetic dot-grid overlay */
-body::before {
-  display: none;
 }
 
 /* Accessible selection */
@@ -75,13 +71,6 @@ body::before {
   padding-bottom: var(--section-spacing);
   border-top: 1px solid var(--border-subtle);
   position: relative;
-}
-
-/* Swiss Grid Utilities */
-.editorial-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2.5rem);
 }
 
 /* Links & Buttons */
@@ -158,14 +147,6 @@ a {
   background-color: var(--bg-hover);
 }
 
-/* Thin Dividers */
-.hairline {
-  height: 1px;
-  background-color: var(--border-subtle);
-  width: 100%;
-  border: none;
-}
-
 /* Discreet Placeholder Badges */
 .placeholder-indicator {
   display: inline-block;
@@ -182,38 +163,6 @@ a {
   font-weight: 400;
 }
 
-/* Status Indicator Dot */
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  padding: 0.35rem 0.75rem;
-  background-color: var(--accent-green-light);
-  border: 1px solid var(--accent-green-border);
-  color: var(--accent-green);
-  letter-spacing: 0.01em;
-}
-
-.pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--accent-green);
-  position: relative;
-}
-
-.pulse-dot::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background-color: var(--accent-green);
-  opacity: 0.4;
-  animation: pulseAnim 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 /* Skip to content accessibility link */
 .skip-to-content {
   position: fixed;
@@ -222,7 +171,7 @@ a {
   z-index: 100;
   padding: 0.625rem 1rem;
   background-color: var(--accent-green);
-  color: #F5F3ED;
+  color: var(--btn-primary-text);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
