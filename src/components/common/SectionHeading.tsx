@@ -19,26 +19,12 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         <div className="section-tag">
           <span>{tag}</span>
         </div>
-        {metaRight && (
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              letterSpacing: '0.06em',
-              color: 'var(--text-tertiary)',
-              textTransform: 'uppercase',
-            }}
-          >
-            {metaRight}
-          </span>
-        )}
+        {metaRight && <span className="section-meta-right">{metaRight}</span>}
       </div>
 
       <h2 className="section-title">
         {titlePrefix}{' '}
-        <span className="font-editorial" style={{ color: 'var(--accent-green)' }}>
-          {titleHighlight}
-        </span>
+        <span className="font-editorial section-title-accent">{titleHighlight}</span>
       </h2>
     </div>
   );

@@ -32,40 +32,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   };
 
   return (
-    <div
-      id="mobile-navigation"
-      style={{
-        position: 'absolute',
-        top: '100%',
-        left: 0,
-        right: 0,
-        backgroundColor: 'var(--bg-ivory)',
-        borderBottom: '1px solid var(--border-strong)',
-        padding: '1.5rem var(--gutter) 2rem',
-      }}
-      className="fade-in-up"
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+    <div id="mobile-navigation" className="mobile-nav-drawer fade-in-up">
+      <div className="mobile-nav-stack">
         {availability.isConfirmed && (
-          <div
-            style={{
-              paddingBottom: '0.75rem',
-              borderBottom: '1px solid var(--border-subtle)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.6875rem',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              color: 'var(--accent-green)',
-            }}
-          >
-            STATUS // {availability.status}
-          </div>
+          <div className="mobile-nav-status">STATUS // {availability.status}</div>
         )}
 
-        <nav
-          aria-label="Mobile Navigation"
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
+        <nav aria-label="Mobile Navigation" className="mobile-nav-links">
           {navigation.map((item) => {
             const isActive = activeSection === item.href;
             return (
@@ -73,16 +46,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 key={item.href}
                 href={resolveHref(item.href)}
                 onClick={(e) => handleLinkClick(e, item.href)}
-                style={{
-                  fontSize: '1.0625rem',
-                  fontWeight: 500,
-                  color: isActive ? 'var(--accent-green)' : 'var(--text-primary)',
-                  padding: '0.75rem 0',
-                  borderBottom: '1px solid var(--border-subtle)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
+                className={`mobile-nav-link ${isActive ? 'active' : ''}`}
               >
                 <span>{item.label}</span>
                 <ArrowUpRight size={15} color="var(--accent-green)" />
@@ -91,12 +55,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           })}
         </nav>
 
-        <div style={{ paddingTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div className="mobile-nav-cta">
           <a
             href={resolveHref('#contact')}
             onClick={(e) => handleLinkClick(e, '#contact')}
             className="btn-primary"
-            style={{ width: '100%' }}
           >
             <span>Get in touch</span>
             <ArrowUpRight size={16} />

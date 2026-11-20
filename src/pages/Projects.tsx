@@ -6,7 +6,7 @@ import { Contact } from '../components/sections/Contact';
 export const Projects: React.FC = () => {
   return (
     <PageLayout>
-      <div style={{ paddingTop: 'var(--nav-height)' }}>
+      <div className="subpage-offset">
         <ProjectsSection />
         <Contact />
       </div>

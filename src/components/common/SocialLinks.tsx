@@ -11,43 +11,12 @@ export const SocialLinks: React.FC = () => {
 
         if (pending) {
           return (
-            <div
-              key={item.id}
-              style={{
-                padding: '1.25rem 0',
-                borderBottom: '1px solid var(--border-subtle)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '1rem',
-              }}
-            >
+            <div key={item.id} className="channel-row">
               <div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.6875rem',
-                    color: 'var(--text-tertiary)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    marginBottom: '0.2rem',
-                  }}
-                >
-                  {item.category}
-                </div>
-                <div
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '1rem',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
-                  {item.label}
-                </div>
+                <div className="channel-label">{item.category}</div>
+                <div className="channel-value channel-value--pending">{item.label}</div>
               </div>
-              <span className="placeholder-indicator" style={{ marginLeft: 0 }}>
-                URL Pending
-              </span>
+              <span className="placeholder-indicator">URL Pending</span>
             </div>
           );
         }
@@ -58,41 +27,13 @@ export const SocialLinks: React.FC = () => {
             href={sanitizeUrl(item.url)}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              padding: '1.25rem 0',
-              borderBottom: '1px solid var(--border-subtle)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              textDecoration: 'none',
-              gap: '1rem',
-            }}
-            className="channel-card"
+            className="channel-row channel-card"
           >
             <div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.6875rem',
-                  color: 'var(--text-tertiary)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  marginBottom: '0.2rem',
-                }}
-              >
-                {item.category}
-              </div>
-              <div
-                style={{
-                  fontWeight: 500,
-                  fontSize: '1rem',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                {item.label}
-              </div>
+              <div className="channel-label">{item.category}</div>
+              <div className="channel-value">{item.label}</div>
             </div>
-            <span className="editorial-link" style={{ fontSize: '0.8125rem' }}>
+            <span className="editorial-link project-link-sm">
               <span>Visit Profile</span>
               <ArrowUpRight size={14} className="icon-arrow" />
             </span>

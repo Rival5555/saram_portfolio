@@ -7,7 +7,7 @@ import { Contact } from '../components/sections/Contact';
 export const Experience: React.FC = () => {
   return (
     <PageLayout>
-      <div style={{ paddingTop: 'var(--nav-height)' }}>
+      <div className="subpage-offset">
         <ExperienceSection />
         <Skills />
         <Contact />

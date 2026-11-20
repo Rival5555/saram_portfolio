@@ -4,18 +4,15 @@ import { personalInfo } from '../../data/personalInfo';
 import { navigationItems } from '../../data/navigation';
 import { useScroll } from '../../hooks/useScroll';
 import { THEME_STORAGE_KEY, BREAKPOINTS } from '../../utils/constants';
-import { safeGetStorage, safeSetStorage, scrollToTop } from '../../utils/helpers';
+import { getInitialTheme, safeSetStorage, scrollToTop } from '../../utils/helpers';
 import { Container } from '../common/Container';
 import { MobileMenu } from './MobileMenu';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = safeGetStorage(THEME_STORAGE_KEY);
-    if (saved === 'dark' || saved === 'light') return saved;
-    return 'light';
-  });
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => getInitialTheme(THEME_STORAGE_KEY));
 
   const { isScrolled, activeSection } = useScroll(navigationItems);
 
@@ -65,7 +62,7 @@ export const Navbar: React.FC = () => {
     safeSetStorage(THEME_STORAGE_KEY, theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#121412' : '#F5F3ED');
+      metaTheme.setAttribute('content', theme === 'dark' ? '#111311' : '#F5F3ED');
     }
   }, [theme]);
 
@@ -74,9 +71,17 @@ export const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
     const handleResize = () => {
@@ -107,82 +112,25 @@ export const Navbar: React.FC = () => {
   return (
     <header
       ref={headerRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        paddingTop: isScrolled ? '0.875rem' : '1.125rem',
-        paddingBottom: isScrolled ? '0.875rem' : '1.125rem',
-        backgroundColor: 'var(--bg-ivory)',
-        borderBottom: '1px solid var(--border-subtle)',
-        transition: 'padding var(--transition-smooth), background-color var(--transition-fast)',
-      }}
+      className={`site-header ${isScrolled ? 'site-header--scrolled' : ''}`}
     >
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
 
-      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Container className="site-header-inner">
         {/* Left: Brand Monogram & Full Name */}
-        <a
-          href="/"
-          onClick={handleBrandClick}
-          className="brand-logo"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'baseline',
-            gap: '0.75rem',
-            textDecoration: 'none',
-          }}
-          title="Back to home"
-        >
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              color: 'var(--accent-green)',
-              padding: '0.15rem 0.4rem',
-              border: '1px solid var(--accent-green)',
-              letterSpacing: '0.06em',
-            }}
-          >
-            {personalInfo.monogram}
-          </span>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span
-              style={{
-                fontWeight: 500,
-                fontSize: '0.9375rem',
-                letterSpacing: '-0.02em',
-                color: 'var(--text-primary)',
-                lineHeight: 1.15,
-              }}
-            >
-              {personalInfo.fullName}
-            </span>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.625rem',
-                color: 'var(--text-tertiary)',
-                letterSpacing: '0.03em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {personalInfo.professionalTitle}
-            </span>
+        <a href="/" onClick={handleBrandClick} className="brand-logo" title="Back to home">
+          <span className="brand-monogram">{personalInfo.monogram}</span>
+          <div className="brand-identity">
+            <span className="brand-name">{personalInfo.fullName}</span>
+            <span className="brand-title">{personalInfo.professionalTitle}</span>
           </div>
         </a>
 
         {/* Center / Right: Desktop Navigation Links */}
         <div className="desktop-nav-group">
-          <nav
-            aria-label="Primary Navigation"
-            style={{ display: 'flex', alignItems: 'center', gap: '1.625rem' }}
-          >
+          <nav aria-label="Primary Navigation" className="primary-nav">
             {navigationItems.map((item) => {
               const isActive = activeSection === item.href;
               return (
@@ -199,14 +147,7 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          <div
-            style={{
-              width: '1px',
-              height: '16px',
-              backgroundColor: 'var(--border-subtle)',
-            }}
-            aria-hidden="true"
-          />
+          <div className="nav-divider" aria-hidden="true" />
 
           <button
             type="button"
@@ -223,8 +164,7 @@ export const Navbar: React.FC = () => {
           <a
             href={resolveSectionHref('#contact')}
             onClick={(e) => handleSectionNavClick(e, '#contact')}
-            className="editorial-link"
-            style={{ fontSize: '0.875rem', paddingBottom: '1px' }}
+            className="editorial-link nav-connect-link"
           >
             <span>Connect</span>
             <ArrowUpRight size={14} className="icon-arrow" />
@@ -232,10 +172,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Controls: Theme Toggle + Hamburger */}
-        <div
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-          className="mobile-menu-trigger-group"
-        >
+        <div className="mobile-menu-trigger-group">
           <button
             type="button"
             onClick={toggleTheme}
@@ -248,6 +185,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
